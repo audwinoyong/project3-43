@@ -3,4 +3,4 @@
 Log:
 
 
-May 12 : Ingredients selection complete, using alamofire request to cocktaildb api 
+May 12 : Ingredients selection complete, using alamofire request to cocktaildb api + basic error handling
