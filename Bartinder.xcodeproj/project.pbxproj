@@ -18,7 +18,7 @@
 		25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */; };
 		25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FA20A44C6E007465E6 /* Assets.xcassets */; };
 		25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FC20A44C6E007465E6 /* LaunchScreen.storyboard */; };
-		CBA72DEC20A8794700DD2411 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBA72DEB20A8794700DD2411 /* GoogleService-Info.plist */; };
+		CB67370520A903AA002BC405 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB67370420A903A9002BC405 /* GoogleService-Info.plist */; };
 		F167837C68BDC031D059F402 /* Pods_Bartinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +39,7 @@
 		25A107FF20A44C6E007465E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E2264E51F607CCADF0888DD /* Pods-Bartinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.debug.xcconfig"; sourceTree = "<group>"; };
 		AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBA72DEB20A8794700DD2411 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CB67370420A903A9002BC405 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +91,7 @@
 		25A107EF20A44C6C007465E6 /* Bartinder */ = {
 			isa = PBXGroup;
 			children = (
-				CBA72DEB20A8794700DD2411 /* GoogleService-Info.plist */,
+				CB67370420A903A9002BC405 /* GoogleService-Info.plist */,
 				25A107F020A44C6C007465E6 /* AppDelegate.swift */,
 				25A107FA20A44C6E007465E6 /* Assets.xcassets */,
 				25A107FF20A44C6E007465E6 /* Info.plist */,
@@ -212,7 +212,7 @@
 			files = (
 				25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */,
 				25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */,
-				CBA72DEC20A8794700DD2411 /* GoogleService-Info.plist in Resources */,
+				CB67370520A903AA002BC405 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
