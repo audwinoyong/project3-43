@@ -2,6 +2,7 @@
 # platform :ios, '10.0'
 
 target 'Bartinder' do
+  platform :ios, '9.0'
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
@@ -10,5 +11,10 @@ target 'Bartinder' do
   pod 'Kingfisher', '~> 4.7'
   pod 'SnapKit', '~>4.0'
   pod 'SwiftyJSON', '~>4.1'
-
+  
+  # Firebase components
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'FirebaseUI/Auth', '~> 5.0'
+  pod 'FirebaseUI/Google', '~> 5.0'
 end

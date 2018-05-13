@@ -18,6 +18,7 @@
 		25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */; };
 		25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FA20A44C6E007465E6 /* Assets.xcassets */; };
 		25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FC20A44C6E007465E6 /* LaunchScreen.storyboard */; };
+		CBA72DEC20A8794700DD2411 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBA72DEB20A8794700DD2411 /* GoogleService-Info.plist */; };
 		F167837C68BDC031D059F402 /* Pods_Bartinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		25A107FF20A44C6E007465E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E2264E51F607CCADF0888DD /* Pods-Bartinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.debug.xcconfig"; sourceTree = "<group>"; };
 		AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBA72DEB20A8794700DD2411 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		25A107EF20A44C6C007465E6 /* Bartinder */ = {
 			isa = PBXGroup;
 			children = (
+				CBA72DEB20A8794700DD2411 /* GoogleService-Info.plist */,
 				25A107F020A44C6C007465E6 /* AppDelegate.swift */,
 				25A107FA20A44C6E007465E6 /* Assets.xcassets */,
 				25A107FF20A44C6E007465E6 /* Info.plist */,
@@ -158,7 +161,7 @@
 				25A107EA20A44C6C007465E6 /* Frameworks */,
 				25A107EB20A44C6C007465E6 /* Resources */,
 				80DE3530954A43C53986D6B0 /* [CP] Embed Pods Frameworks */,
-				78D8A77BE661178EA6470FC7 /* [CP] Copy Pods Resources */,
+				F77708ABABD39F0A22D8E6DE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -209,27 +212,13 @@
 			files = (
 				25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */,
 				25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */,
+				CBA72DEC20A8794700DD2411 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		78D8A77BE661178EA6470FC7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		80DE3530954A43C53986D6B0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,16 +227,26 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -270,6 +269,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F77708ABABD39F0A22D8E6DE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -425,13 +446,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZT8DW74932;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Bartinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bartinder.Bartinderr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bartindr.Bartindr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -444,13 +465,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZT8DW74932;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Bartinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bartinder.Bartinderr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bartindr.Bartindr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

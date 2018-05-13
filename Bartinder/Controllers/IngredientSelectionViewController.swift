@@ -9,9 +9,21 @@
 import SnapKit
 import Alamofire
 import SwiftyJSON
+import Firebase
+import FirebaseUI
 
-class IngredientSelectionViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource
+
+class IngredientSelectionViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, FUIAuthDelegate
 {
+    // Auth Vars
+    fileprivate var authStateDidChangeHandle: AuthStateDidChangeListenerHandle?
+    fileprivate(set) var auth: Auth? = Auth.auth()
+    fileprivate(set) var authUI: FUIAuth? = FUIAuth.defaultAuthUI()
+    let providers: [FUIAuthProvider] = [
+        FUIGoogleAuth()
+    ]
+
+    
     // MARK: Properties
     
     var tableView = UITableView()
@@ -27,6 +39,11 @@ class IngredientSelectionViewController: BaseViewController, UITableViewDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        let authUI = FUIAuth.defaultAuthUI()
+        authUI?.delegate = self
+        
+        
+        
         
         title = "Ingredient Selection"
         
@@ -35,6 +52,29 @@ class IngredientSelectionViewController: BaseViewController, UITableViewDelegate
         fetchData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.authStateDidChangeHandle =
+            self.auth?.addStateDidChangeListener({ (auth, user) in
+                if user == nil {
+                    // user is signed out
+                    self.authUI?.providers = self.providers
+                    let authViewController = self.authUI!.authViewController()
+                    self.present(authViewController, animated: true, completion: nil)
+                } else {
+                    // user is signed in
+                }
+            })
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let handle = self.authStateDidChangeHandle {
+            self.auth?.removeStateDidChangeListener(handle)
+        }
+    }
     
     // MARK: Layout
     
@@ -47,6 +87,9 @@ class IngredientSelectionViewController: BaseViewController, UITableViewDelegate
         })
         tableView.delegate = self
         tableView.dataSource = self
+        
+        let signOutButton = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(self.signOut))
+        self.navigationItem.rightBarButtonItem = signOutButton
     }
     
     
@@ -86,6 +129,14 @@ class IngredientSelectionViewController: BaseViewController, UITableViewDelegate
         cell!.textLabel?.text = ingredient
         
         return cell!
+    }
+    
+    @objc func signOut(_ sender: UIView) {
+        do {
+            try self.authUI?.signOut();
+        } catch {
+            // show error message
+        }
     }
     
     
