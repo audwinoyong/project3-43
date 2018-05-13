@@ -4,6 +4,7 @@
 //
 //  Created by Jason Kumar on 10.05.18.
 //  Copyright © 2018 Bartinder. All rights reserved.
+//
 
 import SnapKit
 import Alamofire
@@ -56,6 +57,13 @@ class IngredientSelectionViewController: BaseViewController, UITableViewDelegate
         return 54
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        let ingredient = ingredients[indexPath.row]
+        
+        navigationController?.pushViewController(DrinkMatchingViewController(ingredient: ingredient), animated: true)
+    }
+    
     
     // MARK: UITableViewDataSource
     
@@ -75,7 +83,6 @@ class IngredientSelectionViewController: BaseViewController, UITableViewDelegate
             cell = UITableViewCell(style: .default, reuseIdentifier: "IngredientCell")
         }
         
-        cell!.selectionStyle = .none
         cell!.textLabel?.text = ingredient
         
         return cell!

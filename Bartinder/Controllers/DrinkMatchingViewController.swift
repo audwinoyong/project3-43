@@ -7,14 +7,116 @@
 //
 
 import Foundation
-import UIKit
+import SnapKit
+import Alamofire
+import SwiftyJSON
 
 class DrinkMatchingViewController: BaseViewController
 {
+    // MARK: Properties
+    
+    var displayedDrink = DrinkCellController()
+    var offScreenDrink = DrinkCellController()
+    
+    var ingredient: String!
+    var drinks = [DrinkModel]()
+    var isError = false
+    var isLoading = false
+    
+    
+    // MARK: Lifecycle
+    
+    init(ingredient: String)
+    {
+        self.ingredient = ingredient
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    // MARK: View Lifecycle
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        title = "Drink Matching"
+        title = ingredient.uppercased()
+        
+        view.backgroundColor = .lightGray
+        
+        setupView()
+        
+        fetchData()
+    }
+    
+    
+    // MARK: Layout
+    
+    func setupView()
+    {
+        // displayedDrink
+        addChildViewController(displayedDrink)
+        view.addSubview(displayedDrink.view)
+        displayedDrink.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onDisplayedDrinkTapped)))
+        displayedDrink.didMove(toParentViewController: self)
+    }
+    
+    
+    // MARK: User Interaction
+    
+    @objc func onDisplayedDrinkTapped()
+    {
+        if let drink = drinks.first
+        {
+            navigationController?.pushViewController(DrinkDetailViewController(drink: drink), animated: true)
+        }
+    }
+    
+    
+    // MARK: Additional Helpers
+    
+    func fetchData()
+    {
+        if isLoading
+        {
+            return
+        }
+        
+        isLoading = true
+        
+        let safeIng = ingredient.replacingOccurrences(of: " ", with: "_")
+        
+        Alamofire.request("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=\(safeIng)").responseJSON { response in
+            response.result.ifSuccess
+            {
+                if let jsonArray = JSON(response.result.value!)["drinks"].array
+                {
+                    for drink in jsonArray
+                    {
+                        //print(drink)
+                        self.drinks.append(DrinkModel(json: drink))
+                    }
+                }
+                
+                if let firstDrink = self.drinks.first
+                {
+                    self.displayedDrink.setDrink(firstDrink)
+                }
+                
+                self.isLoading = false
+            }
+            
+            response.result.ifFailure
+            {
+                print("failure")
+                self.isError = true
+                self.isLoading = false
+            }
+        }
     }
 }

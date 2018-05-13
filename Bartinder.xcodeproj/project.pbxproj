@@ -10,6 +10,10 @@
 		258AD74E20A4594A00EBB674 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD74D20A4594A00EBB674 /* BaseViewController.swift */; };
 		258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD74F20A459CE00EBB674 /* DrinkMatchingViewController.swift */; };
 		258AD75220A45A0E00EBB674 /* DrinkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75120A45A0E00EBB674 /* DrinkDetailViewController.swift */; };
+		258AD75420A6276E00EBB674 /* DrinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75320A6276E00EBB674 /* DrinkModel.swift */; };
+		258AD75720A6E53C00EBB674 /* IngredientCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75620A6E53C00EBB674 /* IngredientCellController.swift */; };
+		258AD75920A6E54E00EBB674 /* DrinkCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75820A6E54E00EBB674 /* DrinkCellController.swift */; };
+		258AD75C20A6EEF100EBB674 /* LayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75B20A6EEF100EBB674 /* LayoutHelper.swift */; };
 		25A107F120A44C6C007465E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F020A44C6C007465E6 /* AppDelegate.swift */; };
 		25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */; };
 		25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FA20A44C6E007465E6 /* Assets.xcassets */; };
@@ -22,6 +26,10 @@
 		258AD74D20A4594A00EBB674 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		258AD74F20A459CE00EBB674 /* DrinkMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkMatchingViewController.swift; sourceTree = "<group>"; };
 		258AD75120A45A0E00EBB674 /* DrinkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailViewController.swift; sourceTree = "<group>"; };
+		258AD75320A6276E00EBB674 /* DrinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkModel.swift; sourceTree = "<group>"; };
+		258AD75620A6E53C00EBB674 /* IngredientCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCellController.swift; sourceTree = "<group>"; };
+		258AD75820A6E54E00EBB674 /* DrinkCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCellController.swift; sourceTree = "<group>"; };
+		258AD75B20A6EEF100EBB674 /* LayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutHelper.swift; sourceTree = "<group>"; };
 		25A107ED20A44C6C007465E6 /* Bartinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bartinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A107F020A44C6C007465E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientSelectionViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +52,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		258AD75520A6E51600EBB674 /* CellControllers */ = {
+			isa = PBXGroup;
+			children = (
+				258AD75620A6E53C00EBB674 /* IngredientCellController.swift */,
+				258AD75820A6E54E00EBB674 /* DrinkCellController.swift */,
+			);
+			path = CellControllers;
+			sourceTree = "<group>";
+		};
+		258AD75A20A6E9B900EBB674 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		25A107E420A44C6C007465E6 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +107,7 @@
 				258AD75120A45A0E00EBB674 /* DrinkDetailViewController.swift */,
 				258AD74F20A459CE00EBB674 /* DrinkMatchingViewController.swift */,
 				25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */,
+				258AD75520A6E51600EBB674 /* CellControllers */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -90,6 +115,7 @@
 		25BC756C20A450EE009763EB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				258AD75320A6276E00EBB674 /* DrinkModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,6 +123,8 @@
 		25BC756D20A450F5009763EB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				258AD75A20A6E9B900EBB674 /* Delegates */,
+				258AD75B20A6EEF100EBB674 /* LayoutHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -251,8 +279,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				258AD75920A6E54E00EBB674 /* DrinkCellController.swift in Sources */,
 				25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */,
 				258AD74E20A4594A00EBB674 /* BaseViewController.swift in Sources */,
+				258AD75420A6276E00EBB674 /* DrinkModel.swift in Sources */,
+				258AD75C20A6EEF100EBB674 /* LayoutHelper.swift in Sources */,
+				258AD75720A6E53C00EBB674 /* IngredientCellController.swift in Sources */,
 				258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */,
 				25A107F120A44C6C007465E6 /* AppDelegate.swift in Sources */,
 				258AD75220A45A0E00EBB674 /* DrinkDetailViewController.swift in Sources */,
