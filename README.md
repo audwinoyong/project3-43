@@ -21,4 +21,5 @@ May 13-18:
   - Displayed a dedicated view for network errors on IngredientSelectionScreen.
   - Added search to IngredientSelectionScreen.
   - Transparent tutorial is now visible for a first time user : Only visible when using DrinkMatchingScreen.
+  - Fixed the API displaying blank ingredients by checking for empty " ", "%20", "\r", "\r\n".
   
