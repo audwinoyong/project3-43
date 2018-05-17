@@ -10,3 +10,15 @@ May 12 : (Automatic) matching for drinks based on ingredients, api is unable to 
 May 13 : Drink detail screen. Navigate to Ingredient -> Alcohol -> Click on the image to display information about the drink/method/other ingredients/amount.
 
 May 13: Add Firebase db connection and Firebase Authentication with a Pre-Built auth screen. Providers allowed are Email/Password and Google
+
+May 13-18: 
+  - Merged Firebase commits.
+  - Reworked DrinkDetailController - image bounce, navigationBar is now translucent.
+  - Added buttons -> swiping in DrinkMatchingController for ease of access -> Can be easily changed to navigation bar later on, but it's done.
+  - Added image placeholder incase of network lag when displaying the image.
+  - Drinks are now swipeable, able to view them by swiping left/right. Selection is still the same.
+  - Added pull to refresh to IngredientSelectionScreen
+  - Displayed a dedicated view for network errors on IngredientSelectionScreen.
+  - Added search to IngredientSelectionScreen.
+  - Transparent tutorial is now visible for a first time user : Only visible when using DrinkMatchingScreen.
+  
