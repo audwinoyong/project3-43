@@ -11,17 +11,20 @@ import SnapKit
 import Alamofire
 import SwiftyJSON
 
-class DrinkMatchingViewController: BaseViewController
+class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate
 {
     // MARK: Properties
     
-    var displayedDrink = DrinkCellController()
-    var offScreenDrink = DrinkCellController()
+    var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    var btnLeft = UIButton()
+    var btnRight = UIButton()
     
     var ingredient: String!
-    var drinks = [DrinkModel]()
+    var drinkVCs = [DrinkCellController]()
     var isError = false
     var isLoading = false
+    var imgLeft = UIImage(named: "Arrow_Left")
+    var imgRight = UIImage(named: "Arrow_Right")
     
     
     // MARK: Lifecycle
@@ -52,6 +55,18 @@ class DrinkMatchingViewController: BaseViewController
         setupView()
         
         fetchData()
+        
+        // Present tutorial above everything
+        if !UserDefaultsHelper.getHasSeenTutorial()
+        {
+            let tutorialVC = TutorialViewController()
+            
+            providesPresentationContextTransitionStyle = true
+            definesPresentationContext = true
+            tutorialVC.modalPresentationStyle = .overCurrentContext
+            
+            navigationController?.present(tutorialVC, animated: true, completion: nil)
+        }
     }
     
     
@@ -59,22 +74,111 @@ class DrinkMatchingViewController: BaseViewController
     
     func setupView()
     {
-        // displayedDrink
-        addChildViewController(displayedDrink)
-        view.addSubview(displayedDrink.view)
-        displayedDrink.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onDisplayedDrinkTapped)))
-        displayedDrink.didMove(toParentViewController: self)
+        // btnLeft
+        view.addSubview(btnLeft)
+        btnLeft.snp.makeConstraints { make in
+            make.left.bottom.equalToSuperview()
+            make.right.equalTo(view.snp.centerX)
+            make.height.equalTo(64)
+        }
+        btnLeft.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        btnLeft.imageView?.contentMode = .scaleAspectFit
+        btnLeft.setImage(imgLeft, for: .normal)
+        btnLeft.tintColor = .darkGray
+        btnLeft.backgroundColor = .white
+        btnLeft.addTarget(self, action: #selector(onBtnLeftTapped), for: .touchUpInside)
+        btnLeft.isEnabled = false
+        
+        
+        // btnRight
+        view.addSubview(btnRight)
+        btnRight.snp.makeConstraints { make in
+            make.right.bottom.equalToSuperview()
+            make.left.equalTo(view.snp.centerX)
+            make.height.equalTo(64)
+        }
+        btnRight.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
+        btnRight.imageView?.contentMode = .scaleAspectFit
+        btnRight.setImage(imgRight, for: .normal)
+        btnRight.tintColor = .darkGray
+        btnRight.backgroundColor = .white
+        btnRight.addTarget(self, action: #selector(onBtnRightTapped), for: .touchUpInside)
+        btnRight.isEnabled = false
+        
+        
+        // pageViewController
+        addChildViewController(pageViewController)
+        view.addSubview(pageViewController.view)
+        pageViewController.view.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview().inset(LayoutHelper.statusBarHeight + 44) // Don't use navBar height because it is messed up by SearchController
+            make.bottom.equalTo(btnLeft.snp.top)
+        }
+        pageViewController.dataSource = self
+        pageViewController.delegate = self
+        pageViewController.didMove(toParentViewController: self)
     }
     
     
     // MARK: User Interaction
     
-    @objc func onDisplayedDrinkTapped()
+    @objc func onDrinkTapped()
     {
-        if let drink = drinks.first
+        if let drinkVC = pageViewController.viewControllers?.first as? DrinkCellController, let drink = drinkVC.getDrink()
         {
             navigationController?.pushViewController(DrinkDetailViewController(drink: drink), animated: true)
         }
+    }
+    
+    @objc func onBtnLeftTapped()
+    {
+        // Find current index
+        if let currentVC = pageViewController.viewControllers?.first as? DrinkCellController, let index = drinkVCs.index(of: currentVC)
+        {
+            // Set previous vc
+            pageViewController.setViewControllers([drinkVCs[index - 1]], direction: .reverse, animated: true, completion: { _ in self.updateButtons() })
+        }
+    }
+    
+    @objc func onBtnRightTapped()
+    {
+        // Find current index
+        if let currentVC = pageViewController.viewControllers?.first as? DrinkCellController, let index = drinkVCs.index(of: currentVC)
+        {
+            // Set next vc
+            pageViewController.setViewControllers([drinkVCs[index + 1]], direction: .forward, animated: true, completion: { _ in self.updateButtons() })
+        }
+    }
+    
+    
+    // MARK: UIPageViewControllerDataSource
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
+    {
+        if let drinkCellController = viewController as? DrinkCellController, let index = drinkVCs.index(of: drinkCellController), index > 0
+        {
+            return drinkVCs[index - 1]
+        }
+        
+        return nil
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
+    {
+        if let drinkCellController = viewController as? DrinkCellController, let index = drinkVCs.index(of: drinkCellController), index < (drinkVCs.count - 1)
+        {
+            return drinkVCs[index + 1]
+        }
+        
+        return nil
+    }
+
+    
+    // MARK: UIPageViewControllerDelegate
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
+    {
+        updateButtons()
     }
     
     
@@ -98,14 +202,19 @@ class DrinkMatchingViewController: BaseViewController
                 {
                     for drink in jsonArray
                     {
-                        //print(drink)
-                        self.drinks.append(DrinkModel(json: drink))
+                        let drinkModel = DrinkModel(json: drink)
+                        let drinkVC = DrinkCellController()
+                        
+                        drinkVC.setDrink(drinkModel)
+                        drinkVC.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onDrinkTapped)))
+                        
+                        self.drinkVCs.append(drinkVC)
                     }
-                }
-                
-                if let firstDrink = self.drinks.first
-                {
-                    self.displayedDrink.setDrink(firstDrink)
+                    
+                    if let first = self.drinkVCs.first
+                    {
+                        self.pageViewController.setViewControllers([first], direction: .forward, animated: true, completion: { _ in self.updateButtons() })
+                    }
                 }
                 
                 self.isLoading = false
@@ -116,7 +225,24 @@ class DrinkMatchingViewController: BaseViewController
                 print("failure")
                 self.isError = true
                 self.isLoading = false
+                self.updateButtons()
             }
+        }
+    }
+    
+    func updateButtons()
+    {
+        // Find current index of drinks
+        if let currentVC = pageViewController.viewControllers?.first as? DrinkCellController, let index = drinkVCs.index(of: currentVC)
+        {
+            // Enable or disable buttons
+            btnLeft.isEnabled = index > 0
+            btnRight.isEnabled = index < drinkVCs.count - 1
+        }
+        else
+        {
+            btnLeft.isEnabled = false
+            btnRight.isEnabled = false
         }
     }
 }

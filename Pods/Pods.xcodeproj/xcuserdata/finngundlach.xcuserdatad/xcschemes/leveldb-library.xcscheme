@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5A35F8D1C0DD72D8D61F300ED1D9C17E"
-               BuildableName = "Pods_Bartinder.framework"
-               BlueprintName = "Pods-Bartinder"
+               BlueprintIdentifier = "4F5E7C621A9D556005E5298CB2CB14F2"
+               BuildableName = "leveldb.framework"
+               BlueprintName = "leveldb-library"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5A35F8D1C0DD72D8D61F300ED1D9C17E"
-            BuildableName = "Pods_Bartinder.framework"
-            BlueprintName = "Pods-Bartinder"
+            BlueprintIdentifier = "4F5E7C621A9D556005E5298CB2CB14F2"
+            BuildableName = "leveldb.framework"
+            BlueprintName = "leveldb-library"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

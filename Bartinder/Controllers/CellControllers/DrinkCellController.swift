@@ -19,6 +19,9 @@ class DrinkCellController: UIViewController // We don't want a white background 
     var lytBottom = UIView()
     var lblTitle = UILabel()
     
+    private var drink: DrinkModel?
+    let imgPlaceholder = UIImage(named: "Cocktail")
+    
     
     // MARK: View Lifecycle
     
@@ -34,27 +37,26 @@ class DrinkCellController: UIViewController // We don't want a white background 
     
     func setupView()
     {
-        let topInset = LayoutHelper.statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0)
-        
         // lytContainer
         view.addSubview(lytContainer)
         lytContainer.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalToSuperview().inset(topInset + 24)
-            make.bottom.equalToSuperview().inset(24)
+            make.top.bottom.equalToSuperview().inset(24)
         }
         lytContainer.backgroundColor = .white
         lytContainer.clipsToBounds = true
-        lytContainer.layer.cornerRadius = 4
+        lytContainer.layer.cornerRadius = 16
         
         
         // imgViewDrink
         lytContainer.addSubview(imgViewDrink)
         imgViewDrink.snp.makeConstraints({ make in
-            make.width.height.equalTo(view.frame.width)
-            make.top.left.equalToSuperview()
+            make.left.top.right.equalToSuperview()
+            make.height.equalTo(lytContainer.snp.width)
         })
         imgViewDrink.contentMode = .scaleAspectFill
+        imgViewDrink.tintColor = .lightGray
+        imgViewDrink.image = imgPlaceholder
         
         
         // lytBottom
@@ -73,11 +75,26 @@ class DrinkCellController: UIViewController // We don't want a white background 
     }
     
     
-    // MARK: Additional Helpers
+    // Additional Helpers
     
-    func setDrink(_ drink: DrinkModel)
+    func getDrink() -> DrinkModel?
     {
-        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl))
-        lblTitle.text = drink.name.uppercased()
+        return drink
+    }
+    
+    func setDrink(_ drink: DrinkModel?)
+    {
+        self.drink = drink
+        
+        if let drink = drink
+        {
+            imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl), placeholder: imgPlaceholder)
+            lblTitle.text = drink.name.uppercased()
+        }
+        else
+        {
+            imgViewDrink.image = imgPlaceholder
+            lblTitle.text = ""
+        }
     }
 }

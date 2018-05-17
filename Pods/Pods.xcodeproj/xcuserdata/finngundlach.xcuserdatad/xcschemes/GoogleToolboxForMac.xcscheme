@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F18055E459424519F1414EDB550F4747"
-               BlueprintName = "SwiftyJSON"
+               BlueprintIdentifier = "E0162255842B3EB0659F04369BD3DD60"
+               BlueprintName = "GoogleToolboxForMac"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SwiftyJSON.framework">
+               BuildableName = "GoogleToolboxForMac.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

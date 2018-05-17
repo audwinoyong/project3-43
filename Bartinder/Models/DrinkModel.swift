@@ -55,8 +55,8 @@ struct DrinkModel
         {
             if let ingredient = json["strIngredient\(index)"].string, let measure = json["strMeasure\(index)"].string
             {
-                let safeIngredient = ingredient.replacingOccurrences(of: " ", with: "")
-                let safeMeasurement = measure.replacingOccurrences(of: " ", with: "")
+                let safeIngredient = ingredient.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
+                let safeMeasurement = measure.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
                 
                 if safeIngredient.count + safeMeasurement.count == 0
                 {

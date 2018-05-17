@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "488CA9079247B8F25888405871FCF2F4"
-               BlueprintName = "GoogleToolboxForMac"
+               BlueprintIdentifier = "DB4379515FDB39958A55CCCD068806BB"
+               BlueprintName = "FirebaseDatabase"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "GoogleToolboxForMac.framework">
+               BuildableName = "libFirebaseDatabase.a">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

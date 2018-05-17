@@ -11,13 +11,21 @@ import SnapKit
 import Alamofire
 import SwiftyJSON
 
-class DrinkDetailViewController: BaseViewController
+class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
 {
     // MARK: Properties
     
+    var gradientView = UIView()
+    
     var scrollView = UIScrollView()
     var contentView = UIView()
+    
+    var lytImgContainer = UIView()
     var imgViewDrink = UIImageView()
+    var lytDrinkInfo = UIView()
+    var lblDrinkTitle = UILabel()
+    var lblDrinkAlcoholicType = UILabel()
+    
     var lblInstructions = UILabel()
     var txtInstructions = UILabel()
     var lblIngredients = UILabel()
@@ -26,7 +34,8 @@ class DrinkDetailViewController: BaseViewController
     var drink: DrinkModel!
     var isError = false
     var isLoading = false
-    
+    let imgPlaceholder = UIImage(named: "Cocktail")
+    var blurImageProcessor: ALDBlurImageProcessor?
     
     // MARK: Lifecycle
     
@@ -49,26 +58,59 @@ class DrinkDetailViewController: BaseViewController
     {
         super.viewDidLoad()
         
-        title = drink.name.uppercased()
-        
-        // TODO: Make top bar invisible
-        
         setupView()
         
         fetchData()
+        
+        updateImageBlur()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        // navBar
+        let navBar = navigationController?.navigationBar
+        navBarBackgroundImage = navBar?.backgroundImage(for: .default)
+        navBar?.setBackgroundImage(UIImage(), for: .default)
+        navBarShadowImage = navBar?.shadowImage
+        navBar?.shadowImage = UIImage()
+        navBarBackgroundColor = navBar?.backgroundColor
+        navBar?.backgroundColor = nil
+        navBarTintColor = navBar?.tintColor
+        navBar?.tintColor = .white
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = gradientView.bounds
+        gradientLayer.colors = [
+            UIColor(white: 0, alpha: 0.3).cgColor,
+            UIColor(white: 0, alpha: 0).cgColor
+        ]
+
+        gradientView.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     
     // MARK: Layout
     
     func setupView()
-    {
+    {        
         // scrollView
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         scrollView.alwaysBounceVertical = true
+        scrollView.delegate = self
+        let insets = UIEdgeInsetsMake(-(LayoutHelper.statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0)), 0, 0, 0)
+        scrollView.contentInset = insets
         
         
         // contentView
@@ -79,35 +121,32 @@ class DrinkDetailViewController: BaseViewController
         }
         
         
-        // imgViewDrink
-        contentView.addSubview(imgViewDrink)
-        imgViewDrink.snp.makeConstraints({ make in
-            make.width.height.equalTo(view.frame.width)
-            make.top.left.equalToSuperview()
-        })
-        imgViewDrink.contentMode = .scaleAspectFill
-        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl))
+        // gradientView
+        view.addSubview(gradientView)
+        gradientView.snp.makeConstraints { make in
+            make.left.top.right.equalToSuperview()
+            make.height.equalTo(LayoutHelper.statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0) + 8)
+        }
         
         
         // lblInstructions
         contentView.addSubview(lblInstructions)
         lblInstructions.snp.makeConstraints({ make in
             make.left.equalToSuperview().offset(16)
-            make.top.equalTo(imgViewDrink.snp.bottom).offset(16)
+            make.top.equalToSuperview().offset(view.frame.width + 16)
         })
         lblInstructions.text = "INSTRUCTIONS"
-        lblInstructions.textColor = .lightGray
+        lblInstructions.textColor = .darkGray
         lblInstructions.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .thin)
         
         
         // txtInstructions
         contentView.addSubview(txtInstructions)
         txtInstructions.snp.makeConstraints({ make in
-            make.left.equalTo(lblInstructions).inset(4)
+            make.left.equalTo(lblInstructions).inset(16)
             make.top.equalTo(lblInstructions.snp.bottom).offset(4)
             make.right.equalToSuperview().inset(16)
         })
-        txtInstructions.textColor = .darkGray
         txtInstructions.numberOfLines = 0
         
         
@@ -118,19 +157,70 @@ class DrinkDetailViewController: BaseViewController
             make.top.equalTo(txtInstructions.snp.bottom).offset(16)
         })
         lblIngredients.text = "INGREDIENTS"
-        lblIngredients.textColor = .lightGray
+        lblIngredients.textColor = .darkGray
         lblIngredients.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .thin)
         
         
         // stackIngredients
         contentView.addSubview(stackIngredients)
         stackIngredients.snp.makeConstraints({ make in
-            make.left.equalTo(txtInstructions)
+            make.left.right.equalTo(txtInstructions)
             make.top.equalTo(lblIngredients.snp.bottom).offset(8)
-            make.right.equalToSuperview().inset(16)
         })
         stackIngredients.axis = .vertical
         stackIngredients.spacing = 16
+        
+        
+        // lytImgContainer
+        contentView.addSubview(lytImgContainer)
+        lytImgContainer.snp.makeConstraints { make in
+            make.left.top.right.equalToSuperview()
+            make.height.equalTo(lytImgContainer.snp.width).priority(.required)
+            make.bottom.greaterThanOrEqualTo(view.snp.top).offset(LayoutHelper.statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0) + 40).priority(.required)
+        }
+        
+        
+        // imgViewDrink
+        contentView.addSubview(imgViewDrink)
+        imgViewDrink.snp.makeConstraints({ make in
+            make.left.right.bottom.equalTo(lytImgContainer)
+            make.top.equalTo(view).priority(.high)
+            make.height.greaterThanOrEqualTo(lytImgContainer).priority(.required)
+        })
+        imgViewDrink.contentMode = .scaleAspectFill
+        imgViewDrink.tintColor = .lightGray
+        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl), placeholder: imgPlaceholder, completionHandler: { (image, _, _, _) in
+            self.onImageDrinkChanged(to: image)
+        })
+        
+        
+        // lytDrinkInfo
+        imgViewDrink.addSubview(lytDrinkInfo)
+        lytDrinkInfo.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        lytDrinkInfo.backgroundColor = UIColor(white: 0, alpha: 0.3)
+        
+        
+        // lblDrinkTitle
+        lytDrinkInfo.addSubview(lblDrinkTitle)
+        lblDrinkTitle.snp.makeConstraints({ make in
+            make.left.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+        })
+        lblDrinkTitle.text = drink.name
+        lblDrinkTitle.textColor = .white
+        
+        
+        // lblDrinkAlcoholicType
+        lytDrinkInfo.addSubview(lblDrinkAlcoholicType)
+        lblDrinkAlcoholicType.snp.makeConstraints({ make in
+            make.right.equalToSuperview().inset(16)
+            make.centerY.equalToSuperview()
+        })
+        lblDrinkAlcoholicType.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .light)
+        lblDrinkAlcoholicType.textColor = .white
         
         
         // contentView
@@ -139,8 +229,36 @@ class DrinkDetailViewController: BaseViewController
         }
     }
     
+    func updateImageBlur()
+    {
+        let scrollOffset = scrollView.contentOffset.y
+        
+        // Image is square -> normal header height = frame.width
+        let normalHeaderHeight = view.frame.width
+        
+        // Blur image when scrolling
+        // scrollOffset = 0 -> no blur
+        // scrollOffset = normalHeaderHeight -> max blur
+        let blurValue = max(min(scrollOffset / normalHeaderHeight, 1), 0)
+        
+        if let blurImageProcessor = blurImageProcessor
+        {
+            blurImageProcessor.asyncBlur(withRadius: UInt32(blurValue * 39), iterations: 3, cancelingLastOperation: true, successBlock: { image in
+                self.imgViewDrink.image = image
+            }, errorBlock: { _ in })
+        }
+    }
+    
     
     // MARK: User Interaction
+    
+    
+    // MARK: UIScrollViewDelegate
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
+        updateImageBlur()
+    }
     
     
     // MARK: Additional Helpers
@@ -178,7 +296,13 @@ class DrinkDetailViewController: BaseViewController
     {
         self.drink = drink
         
-        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl))
+        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl), placeholder: imgPlaceholder, completionHandler: { (image, _, _, _) in
+            self.onImageDrinkChanged(to: image)
+        })
+        
+        lblDrinkTitle.text = drink.name
+        
+        lblDrinkAlcoholicType.text = drink.alcoholicType.lowercased()
         
         txtInstructions.text = drink.instructions
         
@@ -197,7 +321,7 @@ class DrinkDetailViewController: BaseViewController
             imgIngredient.snp.makeConstraints { make in
                 make.width.height.equalTo(40)
                 make.top.bottom.equalToSuperview()
-                make.left.equalToSuperview().inset(8)
+                make.left.equalToSuperview()
             }
             imgIngredient.clipsToBounds = true
             imgIngredient.layer.cornerRadius = 20
@@ -229,5 +353,10 @@ class DrinkDetailViewController: BaseViewController
             
             stackIngredients.addArrangedSubview(subview)
         }
+    }
+    
+    func onImageDrinkChanged(to image: UIImage?)
+    {
+        blurImageProcessor = ALDBlurImageProcessor(image: image)
     }
 }
