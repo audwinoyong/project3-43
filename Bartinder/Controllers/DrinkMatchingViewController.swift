@@ -29,7 +29,6 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     var imgRight = UIImage(named: "Arrow_Right")
     
     var drinkService: DrinkService!
-    var userId: String?
     
     // MARK: Lifecycle
     
@@ -53,9 +52,6 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         super.viewDidLoad()
         
         drinkService = DrinkService()
-        if let currentUser = self.auth?.currentUser {
-            userId = currentUser.uid
-        }
         
         title = ingredient.uppercased()
         

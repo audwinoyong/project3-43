@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         self.window?.backgroundColor = .white
         
         
-        let screen1 = IngredientSelectionViewController()
-        screen1.title = "Ingredients"
+        let screen1 = FavoritesViewController()
+        screen1.title = "Favorites"
         screen1.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         
         let screen2 = DrinkMatchingViewController(ingredient: "Gin")

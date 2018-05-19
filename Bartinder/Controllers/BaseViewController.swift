@@ -27,6 +27,10 @@ class BaseViewController: UIViewController, FUIAuthDelegate
         FUIGoogleAuth()
     ]
     
+    public var userId: String? {
+        return auth?.currentUser?.uid
+    }
+    
     
     // MARK: View Lifecycle
     
