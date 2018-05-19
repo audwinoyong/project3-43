@@ -10,6 +10,7 @@ import Foundation
 import SnapKit
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate
 {
@@ -18,6 +19,7 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     var pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     var btnLeft = UIButton()
     var btnRight = UIButton()
+    var saveDrink = UIButton()
     
     var ingredient: String!
     var drinkVCs = [DrinkCellController]()
@@ -26,6 +28,8 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     var imgLeft = UIImage(named: "Arrow_Left")
     var imgRight = UIImage(named: "Arrow_Right")
     
+    var drinkService: DrinkService!
+    var userId = ""
     
     // MARK: Lifecycle
     
@@ -47,6 +51,9 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        drinkService = DrinkService()
+        userId = (Auth.auth().currentUser?.uid)!
         
         title = ingredient.uppercased()
         
@@ -74,11 +81,23 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     
     func setupView()
     {
+        // saveDrink
+        view.addSubview(saveDrink)
+        saveDrink.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalTo(view.snp.centerX)
+            make.height.equalTo(64)
+        }
+        saveDrink.setTitle("Save", for: .normal)
+        saveDrink.setTitleColor(UIColor.black, for: .normal)
+        saveDrink.backgroundColor = .white
+        saveDrink.addTarget(self, action: #selector(onSaveBtnTapped), for: .touchUpInside)
+        
         // btnLeft
         view.addSubview(btnLeft)
         btnLeft.snp.makeConstraints { make in
             make.left.bottom.equalToSuperview()
-            make.right.equalTo(view.snp.centerX)
+            make.right.equalTo(saveDrink.snp.left)
             make.height.equalTo(64)
         }
         btnLeft.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
@@ -94,7 +113,7 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         view.addSubview(btnRight)
         btnRight.snp.makeConstraints { make in
             make.right.bottom.equalToSuperview()
-            make.left.equalTo(view.snp.centerX)
+            make.left.equalTo(saveDrink.snp.right)
             make.height.equalTo(64)
         }
         btnRight.contentEdgeInsets = UIEdgeInsetsMake(16, 16, 16, 16)
@@ -147,6 +166,13 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         {
             // Set next vc
             pageViewController.setViewControllers([drinkVCs[index + 1]], direction: .forward, animated: true, completion: { _ in self.updateButtons() })
+        }
+    }
+    
+    @objc func onSaveBtnTapped() {
+        if let drinkController = pageViewController.viewControllers?.first as? DrinkCellController {
+            let drink = drinkController.getDrink()!
+            drinkService.saveDrinkFor(userId: userId, drink)
         }
     }
     

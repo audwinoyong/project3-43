@@ -42,12 +42,21 @@ class IngredientSelectionViewController: BaseViewController, UISearchResultsUpda
     {
         super.viewDidLoad()
         
+        
         let authUI = FUIAuth.defaultAuthUI()
         authUI?.delegate = self
         
         setupView()
         
         fetchData()
+        
+        // example on how to get user saved drinks
+//        let drinkService = DrinkService()
+//        let userid = auth?.currentUser?.uid
+//        var drinks: [DrinkModel] = []
+//        drinkService.getDrinksFor(userId: userid!, callback: { result in
+//            drinks = result
+//        })
     }
     
     override func viewWillAppear(_ animated: Bool)
