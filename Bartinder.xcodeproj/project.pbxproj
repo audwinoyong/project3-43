@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		25182A4C20AAF75000580504 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25182A4B20AAF75000580504 /* GoogleService-Info.plist */; };
 		255FC2B720AB40F9000DC738 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2B620AB40F9000DC738 /* TutorialViewController.swift */; };
 		255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */; };
 		255FC2C320ADB56A000DC738 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2C220ADB56A000DC738 /* ALDBlurImageProcessor.m */; };
@@ -23,12 +22,14 @@
 		25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */; };
 		25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FA20A44C6E007465E6 /* Assets.xcassets */; };
 		25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FC20A44C6E007465E6 /* LaunchScreen.storyboard */; };
+		CB59619020B025B600528E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB59618F20B025B600528E29 /* GoogleService-Info.plist */; };
+		CB59619320B02B3900528E29 /* DrinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619220B02B3900528E29 /* DrinkService.swift */; };
+		CB59619520B030C100528E29 /* SnapshotParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619420B030C100528E29 /* SnapshotParser.swift */; };
 		F167837C68BDC031D059F402 /* Pods_Bartinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1B8AC869E1E60CE62D207311 /* Pods-Bartinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.release.xcconfig"; sourceTree = "<group>"; };
-		25182A4B20AAF75000580504 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		255FC2B620AB40F9000DC738 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		255FC2BF20ADB4AC000DC738 /* Bartinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bartinder-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -50,6 +51,9 @@
 		25A107FF20A44C6E007465E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E2264E51F607CCADF0888DD /* Pods-Bartinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.debug.xcconfig"; sourceTree = "<group>"; };
 		AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB59618F20B025B600528E29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CB59619220B02B3900528E29 /* DrinkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkService.swift; sourceTree = "<group>"; };
+		CB59619420B030C100528E29 /* SnapshotParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,12 +115,13 @@
 		25A107EF20A44C6C007465E6 /* Bartinder */ = {
 			isa = PBXGroup;
 			children = (
+				CB59618F20B025B600528E29 /* GoogleService-Info.plist */,
 				25A107F020A44C6C007465E6 /* AppDelegate.swift */,
 				25A107FA20A44C6E007465E6 /* Assets.xcassets */,
 				255FC2BF20ADB4AC000DC738 /* Bartinder-Bridging-Header.h */,
-				25182A4B20AAF75000580504 /* GoogleService-Info.plist */,
 				25A107FF20A44C6E007465E6 /* Info.plist */,
 				25A107FC20A44C6E007465E6 /* LaunchScreen.storyboard */,
+				CB59619120B02B1E00528E29 /* Services */,
 				25BC756C20A450EE009763EB /* Models */,
 				25BC756B20A450E2009763EB /* Controllers */,
 				25BC756D20A450F5009763EB /* Helpers */,
@@ -141,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				258AD75320A6276E00EBB674 /* DrinkModel.swift */,
+				CB59619420B030C100528E29 /* SnapshotParser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,6 +169,14 @@
 				1B8AC869E1E60CE62D207311 /* Pods-Bartinder.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CB59619120B02B1E00528E29 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CB59619220B02B3900528E29 /* DrinkService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		E33356766A3C536C941E907C /* Frameworks */ = {
@@ -237,7 +251,7 @@
 			files = (
 				25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */,
 				25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */,
-				25182A4C20AAF75000580504 /* GoogleService-Info.plist in Resources */,
+				CB59619020B025B600528E29 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,8 +343,10 @@
 				25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */,
 				258AD74E20A4594A00EBB674 /* BaseViewController.swift in Sources */,
 				258AD75420A6276E00EBB674 /* DrinkModel.swift in Sources */,
+				CB59619320B02B3900528E29 /* DrinkService.swift in Sources */,
 				258AD75C20A6EEF100EBB674 /* LayoutHelper.swift in Sources */,
 				258AD75E20A886D300EBB674 /* ErrorCellController.swift in Sources */,
+				CB59619520B030C100528E29 /* SnapshotParser.swift in Sources */,
 				255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */,
 				258AD75720A6E53C00EBB674 /* IngredientCellController.swift in Sources */,
 				258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */,
@@ -476,7 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZT8DW74932;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Bartinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -498,7 +514,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZT8DW74932;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Bartinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

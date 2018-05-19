@@ -8,58 +8,84 @@
 
 import Foundation
 import SwiftyJSON
+import Firebase
 
-struct DrinkModel
+struct DrinkModel: SnapshotParser
 {
-    var id = ""
-    var name = ""
-    var imgUrl = ""
-    var alcoholicType = ""
-    var glass = ""
-    var instructions = ""
-    var ingredientsAndMeasurements = [(String, String)]()
+    var id: String
+    var name: String
+    var imgUrl: String
+    var alcoholicType: String
+    var glass: String
+    var instructions: String
+    var ingredientsAndMeasurements: [(String, String)]
+    
+    init() {
+        id = ""
+        name = ""
+        imgUrl = ""
+        alcoholicType = ""
+        glass = ""
+        instructions = ""
+        ingredientsAndMeasurements = [(String, String)]()
+    }
+    
+    var dictionary: [String: String] {
+        return [
+            "id": id,
+            "name": name,
+            "imgURL": imgUrl
+        ]
+    }
+    
+    init(with snapshot: DataSnapshot) {
+        self.init()
+        
+        if snapshot.hasChild("id") {
+            id = snapshot.childSnapshot(forPath: "id").value as! String
+        }
+        if snapshot.hasChild("name") {
+            name = snapshot.childSnapshot(forPath: "name").value as! String
+        }
+        if snapshot.hasChild("imgURL") {
+            imgUrl = snapshot.childSnapshot(forPath: "imgURL").value as! String
+        }
+    }
     
     init(json: JSON)
     {
-        if let id = json["idDrink"].string
-        {
+        self.init()
+        
+        if let id = json["idDrink"].string {
             self.id = id
         }
         
-        if let name = json["strDrink"].string
-        {
+        if let name = json["strDrink"].string {
             self.name = name
         }
         
-        if let imgUrl = json["strDrinkThumb"].string
-        {
+        if let imgUrl = json["strDrinkThumb"].string {
             self.imgUrl = imgUrl
         }
         
-        if let alcoholicType = json["strAlcoholic"].string
-        {
+        if let alcoholicType = json["strAlcoholic"].string {
             self.alcoholicType = alcoholicType
         }
         
-        if let glass = json["strGlass"].string
-        {
+        if let glass = json["strGlass"].string {
             self.glass = glass
         }
         
-        if let instructions = json["strInstructions"].string
-        {
+        if let instructions = json["strInstructions"].string {
             self.instructions = instructions
         }
         
-        for index in 1...15
-        {
-            if let ingredient = json["strIngredient\(index)"].string, let measure = json["strMeasure\(index)"].string
-            {
+        for index in 1...15 {
+            if let ingredient = json["strIngredient\(index)"].string, let measure = json["strMeasure\(index)"].string {
                 let safeIngredient = ingredient.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
                 let safeMeasurement = measure.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\r", with: "")
                 
-                if safeIngredient.count + safeMeasurement.count == 0
-                {
+                if safeIngredient.count + safeMeasurement.count == 0 {
                     continue
                 }
                 
