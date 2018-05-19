@@ -12,7 +12,7 @@ import SwiftyJSON
 import Firebase
 import FirebaseUI
 
-class IngredientSelectionViewController: BaseViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource, FUIAuthDelegate
+class IngredientSelectionViewController: BaseViewController, UISearchResultsUpdating, UITableViewDelegate, UITableViewDataSource
 {
     // MARK: Properties
     
@@ -27,24 +27,12 @@ class IngredientSelectionViewController: BaseViewController, UISearchResultsUpda
     var isLoading = false
     var isKeyboardShown: Bool!
     
-    // Auth Vars
-    fileprivate var authStateDidChangeHandle: AuthStateDidChangeListenerHandle?
-    fileprivate(set) var auth: Auth? = Auth.auth()
-    fileprivate(set) var authUI: FUIAuth? = FUIAuth.defaultAuthUI()
-    let providers: [FUIAuthProvider] = [
-        FUIGoogleAuth()
-    ]
-    
     
     // MARK: View Lifecycle
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        
-        let authUI = FUIAuth.defaultAuthUI()
-        authUI?.delegate = self
         
         setupView()
         
@@ -67,21 +55,6 @@ class IngredientSelectionViewController: BaseViewController, UISearchResultsUpda
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: .UIKeyboardWillHide, object: nil)
         
         isKeyboardShown = false
-        
-        self.authStateDidChangeHandle = self.auth?.addStateDidChangeListener({ (auth, user) in
-            // user is signed out
-            if user == nil
-            {
-                self.authUI?.providers = self.providers
-                let authViewController = self.authUI!.authViewController()
-                
-                self.present(authViewController, animated: true, completion: nil)
-            }
-            else
-            {
-                // user is signed in
-            }
-        })
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -93,10 +66,6 @@ class IngredientSelectionViewController: BaseViewController, UISearchResultsUpda
         
         NotificationCenter.default.removeObserver(self)
         
-        if let handle = self.authStateDidChangeHandle
-        {
-            self.auth?.removeStateDidChangeListener(handle)
-        }
     }
     
     

@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import FirebaseUI
 
-class BaseViewController: UIViewController
+class BaseViewController: UIViewController, FUIAuthDelegate
 {
     // MARK: Properties
     
@@ -17,6 +18,14 @@ class BaseViewController: UIViewController
     var navBarShadowImage: UIImage?
     var navBarBackgroundColor: UIColor?
     var navBarTintColor: UIColor?
+    
+    // Auth Vars
+    fileprivate var authStateDidChangeHandle: AuthStateDidChangeListenerHandle?
+    fileprivate(set) var auth: Auth? = Auth.auth()
+    fileprivate(set) var authUI: FUIAuth? = FUIAuth.defaultAuthUI()
+    let providers: [FUIAuthProvider] = [
+        FUIGoogleAuth()
+    ]
     
     
     // MARK: View Lifecycle
@@ -26,6 +35,9 @@ class BaseViewController: UIViewController
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        let authUI = FUIAuth.defaultAuthUI()
+        authUI?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -39,6 +51,18 @@ class BaseViewController: UIViewController
         navBar?.shadowImage = navBarShadowImage
         navBar?.backgroundColor = navBarBackgroundColor
         navBar?.tintColor = navBarTintColor
+        
+        self.authStateDidChangeHandle = self.auth?.addStateDidChangeListener({ (auth, user) in
+            // user is signed out
+            if user == nil {
+                self.authUI?.providers = self.providers
+                let authViewController = self.authUI!.authViewController()
+                
+                self.present(authViewController, animated: true, completion: nil)
+            } else {
+                // user is signed in
+            }
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool)
@@ -50,5 +74,9 @@ class BaseViewController: UIViewController
         navBarShadowImage = navBar?.shadowImage
         navBarBackgroundColor = navBar?.backgroundColor
         navBarTintColor = navBar?.tintColor
+        
+        if let handle = self.authStateDidChangeHandle {
+            self.auth?.removeStateDidChangeListener(handle)
+        }
     }
 }

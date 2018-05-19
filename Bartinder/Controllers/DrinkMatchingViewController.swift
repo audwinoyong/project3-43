@@ -29,7 +29,7 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     var imgRight = UIImage(named: "Arrow_Right")
     
     var drinkService: DrinkService!
-    var userId = ""
+    var userId: String?
     
     // MARK: Lifecycle
     
@@ -53,7 +53,9 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         super.viewDidLoad()
         
         drinkService = DrinkService()
-        userId = (Auth.auth().currentUser?.uid)!
+        if let currentUser = self.auth?.currentUser {
+            userId = currentUser.uid
+        }
         
         title = ingredient.uppercased()
         
@@ -84,7 +86,7 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         // saveDrink
         view.addSubview(saveDrink)
         saveDrink.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottomMargin)
             make.centerX.equalTo(view.snp.centerX)
             make.height.equalTo(64)
         }
@@ -96,7 +98,8 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         // btnLeft
         view.addSubview(btnLeft)
         btnLeft.snp.makeConstraints { make in
-            make.left.bottom.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottomMargin)
+            make.left.equalToSuperview()
             make.right.equalTo(saveDrink.snp.left)
             make.height.equalTo(64)
         }
@@ -112,7 +115,8 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         // btnRight
         view.addSubview(btnRight)
         btnRight.snp.makeConstraints { make in
-            make.right.bottom.equalToSuperview()
+            make.bottom.equalTo(view.snp.bottomMargin)
+            make.right.equalToSuperview()
             make.left.equalTo(saveDrink.snp.right)
             make.height.equalTo(64)
         }
@@ -170,9 +174,9 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
     }
     
     @objc func onSaveBtnTapped() {
-        if let drinkController = pageViewController.viewControllers?.first as? DrinkCellController {
+        if let drinkController = pageViewController.viewControllers?.first as? DrinkCellController, let uid = userId {
             let drink = drinkController.getDrink()!
-            drinkService.saveDrinkFor(userId: userId, drink)
+            drinkService.saveDrinkFor(userId: uid, drink)
         }
     }
     
