@@ -35,13 +35,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 //        let cocktailImage = UIImage(named: "Cocktail")
 //        screen2.tabBarItem = UITabBarItem(title: "Match", image: UIImage(named: "Cocktail"), tag: 1)
         
-        var drink = DrinkModel()
-        drink.id = "16134"
-        drink.name = "Drink 1"
-        drink.imgUrl = "https://www.thecocktaildb.com/images/media/drink/yvxrwv1472669728.jpg"
-        let screen3 = DrinkDetailViewController(drink: drink)
-        screen3.title = "Drink Detail"
-        screen3.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 2)
+//        var drink = DrinkModel()
+//        drink.id = "16134"
+//        drink.name = "Drink 1"
+//        drink.imgUrl = "https://www.thecocktaildb.com/images/media/drink/yvxrwv1472669728.jpg"
+//        let screen3 = DrinkDetailViewController(drink: drink)
+//        screen3.title = "Drink Detail"
+//        screen3.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 2)
+        
+        
+        let screen3 = FriendsViewController()
+        screen3.title = "Friends"
+        screen3.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
+        screen3.tabBarItem.title = "Friends"
         
         let controllers = [screen1, screen2, screen3]
         let tabController = UITabBarController()
