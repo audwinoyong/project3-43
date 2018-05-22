@@ -46,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         let screen3 = FriendsViewController()
         screen3.title = "Friends"
-        screen3.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 2)
-        screen3.tabBarItem.title = "Friends"
+        screen3.tabBarItem = UITabBarItem(title: "Friends", image: UIImage(named: "People"), tag: 2)
+        
         
         let controllers = [screen1, screen2, screen3]
         let tabController = UITabBarController()

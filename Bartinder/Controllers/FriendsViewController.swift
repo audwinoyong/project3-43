@@ -36,12 +36,11 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
         setupView()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     func setupView() {
+        // sort friends name alphabetically
+        friends.sort(by: { $0.name < $1.name })
+        
         // tableView
         view.addSubview(tableView)
         tableView.snp.makeConstraints({ make in
@@ -50,9 +49,18 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         
-        let addButton = UIBarButtonItem.init(barButtonSystemItem: .add,
+        // set bar button items
+        let editButton = UIBarButtonItem.init(barButtonSystemItem: .edit,
+                                              target: self,
+                                              action: #selector(editButtonTapped))
+        
+        self.navigationItem.leftBarButtonItem = editButton
+
+        let addButton = UIBarButtonItem.init(image: UIImage(named: "Contact Add"),
+                                             style: .plain,
                                              target: self,
-                                             action: #selector(addButtonPressed))
+                                             action: #selector(addButtonTapped))
+        
         self.navigationItem.rightBarButtonItem = addButton
     }
     
@@ -65,31 +73,30 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         let cell = UITableViewCell()
         cell.textLabel?.text = friend.name
+        cell.imageView?.image = UIImage(named: "Contact")
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+//    {
 //        let friend = friends[indexPath.row]
-        // get the friend's favourite drink
+//        // get the friend's favourite drink
 //        navigationController?.pushViewController(DrinkDetailViewController(drink: drink), animated: true)
+//
+//        navigationController?.pushViewController(IngredientSelectionViewController(), animated: true)
+//    }
+    
+    @objc func editButtonTapped() {
+        let tableViewEditingMode = tableView.isEditing
+        
+        tableView.setEditing(!tableViewEditingMode, animated: true)
     }
     
-    @objc func addButtonPressed() {
-        // add new friend
+    @objc func addButtonTapped() {
+        navigationController?.pushViewController(AddFriendsViewController(), animated: true)
     }
-    
-    
-    /*
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-        // Configure the cell...
-     
-        return cell
-     }
-     */
     
     /*
      // Override to support conditional editing of the table view.
@@ -99,6 +106,9 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
      }
      */
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
     
     // Override to support editing the table view.
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -127,14 +137,20 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
      }
      */
     
-    /*
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        // Get the new view controller using segue.destinationViewController.
+//        // Pass the selected object to the new view controller.
+//
+//        _ = segue.destination as! AddFriendsViewController
+//    }
+    
 
 }

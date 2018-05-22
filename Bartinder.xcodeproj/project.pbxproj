@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F9684B620B2548A00E2EAD1 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9684B520B2548A00E2EAD1 /* FriendModel.swift */; };
 		1F9684BA20B2F70D00E2EAD1 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9684B920B2F70D00E2EAD1 /* FriendsViewController.swift */; };
+		1F9684BE20B3155800E2EAD1 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9684BD20B3155800E2EAD1 /* AddFriendsViewController.swift */; };
 		255FC2B720AB40F9000DC738 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2B620AB40F9000DC738 /* TutorialViewController.swift */; };
 		255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */; };
 		255FC2C320ADB56A000DC738 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2C220ADB56A000DC738 /* ALDBlurImageProcessor.m */; };
@@ -36,6 +37,7 @@
 		1B8AC869E1E60CE62D207311 /* Pods-Bartinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.release.xcconfig"; sourceTree = "<group>"; };
 		1F9684B520B2548A00E2EAD1 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
 		1F9684B920B2F70D00E2EAD1 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		1F9684BD20B3155800E2EAD1 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		255FC2B620AB40F9000DC738 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		255FC2BF20ADB4AC000DC738 /* Bartinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bartinder-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				255FC2B620AB40F9000DC738 /* TutorialViewController.swift */,
 				CB59619A20B0693300528E29 /* FavoritesViewController.swift */,
 				1F9684B920B2F70D00E2EAD1 /* FriendsViewController.swift */,
+				1F9684BD20B3155800E2EAD1 /* AddFriendsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 				255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */,
 				258AD75720A6E53C00EBB674 /* IngredientCellController.swift in Sources */,
 				258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */,
+				1F9684BE20B3155800E2EAD1 /* AddFriendsViewController.swift in Sources */,
 				CB59619920B0688200528E29 /* DrinkAPI.swift in Sources */,
 				1F9684BA20B2F70D00E2EAD1 /* FriendsViewController.swift in Sources */,
 				1F9684B620B2548A00E2EAD1 /* FriendModel.swift in Sources */,
