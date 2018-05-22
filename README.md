@@ -24,4 +24,4 @@ May 13-18:
   - Fixed the API displaying blank ingredients by checking for empty " ", "%20", "\r", "\r\n".
   - Useless but pretty animations
   
-  May 21: Add Friends screen.
+  May 21-22: Add "Friends" and "Add Friends" screens.
