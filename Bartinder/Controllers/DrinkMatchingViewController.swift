@@ -53,8 +53,8 @@ class DrinkMatchingViewController: BaseViewController, UIPageViewControllerDataS
         
         drinkService = DrinkService()
         
-        title = ingredient.uppercased()
-        
+//        title = ingredient.uppercased()
+
         view.backgroundColor = .lightGray
         
         setupView()
