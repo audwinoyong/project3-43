@@ -25,4 +25,6 @@ May 13-18:
   - Useless but pretty animations
   
   May 21-22: Add "Friends" and "Add Friends" screens.
+  
+  
   May 28: Added proper tinder-like swipe. 
