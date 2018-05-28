@@ -10,6 +10,7 @@ target 'Bartinder' do
   pod 'Kingfisher', '~> 4.7'
   pod 'SnapKit', '~>4.0'
   pod 'SwiftyJSON', '~>4.1'
+  pod 'ZLSwipeableViewSwift', :git => 'https://github.com/zhxnlai/ZLSwipeableViewSwift.git', :commit => 'd3fed8f'
   
   # Firebase components
   pod 'Firebase/Core'

@@ -7,15 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F9684B620B2548A00E2EAD1 /* FriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9684B520B2548A00E2EAD1 /* FriendModel.swift */; };
+		1F9684BA20B2F70D00E2EAD1 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9684B920B2F70D00E2EAD1 /* FriendsViewController.swift */; };
+		1F9684BE20B3155800E2EAD1 /* AddFriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9684BD20B3155800E2EAD1 /* AddFriendsViewController.swift */; };
 		255FC2B720AB40F9000DC738 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2B620AB40F9000DC738 /* TutorialViewController.swift */; };
 		255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */; };
 		255FC2C320ADB56A000DC738 /* ALDBlurImageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 255FC2C220ADB56A000DC738 /* ALDBlurImageProcessor.m */; };
+		2583138C20B755D700E96876 /* DrinkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583138B20B755D700E96876 /* DrinkCardView.swift */; };
 		258AD74E20A4594A00EBB674 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD74D20A4594A00EBB674 /* BaseViewController.swift */; };
 		258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD74F20A459CE00EBB674 /* DrinkMatchingViewController.swift */; };
 		258AD75220A45A0E00EBB674 /* DrinkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75120A45A0E00EBB674 /* DrinkDetailViewController.swift */; };
 		258AD75420A6276E00EBB674 /* DrinkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75320A6276E00EBB674 /* DrinkModel.swift */; };
-		258AD75720A6E53C00EBB674 /* IngredientCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75620A6E53C00EBB674 /* IngredientCellController.swift */; };
-		258AD75920A6E54E00EBB674 /* DrinkCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75820A6E54E00EBB674 /* DrinkCellController.swift */; };
 		258AD75C20A6EEF100EBB674 /* LayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75B20A6EEF100EBB674 /* LayoutHelper.swift */; };
 		258AD75E20A886D300EBB674 /* ErrorCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD75D20A886D300EBB674 /* ErrorCellController.swift */; };
 		25A107F120A44C6C007465E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F020A44C6C007465E6 /* AppDelegate.swift */; };
@@ -32,17 +34,19 @@
 
 /* Begin PBXFileReference section */
 		1B8AC869E1E60CE62D207311 /* Pods-Bartinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.release.xcconfig"; sourceTree = "<group>"; };
+		1F9684B520B2548A00E2EAD1 /* FriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendModel.swift; sourceTree = "<group>"; };
+		1F9684B920B2F70D00E2EAD1 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		1F9684BD20B3155800E2EAD1 /* AddFriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsViewController.swift; sourceTree = "<group>"; };
 		255FC2B620AB40F9000DC738 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
 		255FC2BF20ADB4AC000DC738 /* Bartinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bartinder-Bridging-Header.h"; sourceTree = "<group>"; };
 		255FC2C120ADB534000DC738 /* ALDBlurImageProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ALDBlurImageProcessor.h; sourceTree = "<group>"; };
 		255FC2C220ADB56A000DC738 /* ALDBlurImageProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ALDBlurImageProcessor.m; sourceTree = "<group>"; };
+		2583138B20B755D700E96876 /* DrinkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCardView.swift; sourceTree = "<group>"; };
 		258AD74D20A4594A00EBB674 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		258AD74F20A459CE00EBB674 /* DrinkMatchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkMatchingViewController.swift; sourceTree = "<group>"; };
 		258AD75120A45A0E00EBB674 /* DrinkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailViewController.swift; sourceTree = "<group>"; };
 		258AD75320A6276E00EBB674 /* DrinkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkModel.swift; sourceTree = "<group>"; };
-		258AD75620A6E53C00EBB674 /* IngredientCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCellController.swift; sourceTree = "<group>"; };
-		258AD75820A6E54E00EBB674 /* DrinkCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkCellController.swift; sourceTree = "<group>"; };
 		258AD75B20A6EEF100EBB674 /* LayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutHelper.swift; sourceTree = "<group>"; };
 		258AD75D20A886D300EBB674 /* ErrorCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCellController.swift; sourceTree = "<group>"; };
 		25A107ED20A44C6C007465E6 /* Bartinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bartinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,12 +85,18 @@
 			path = BlurImageProcessor;
 			sourceTree = "<group>";
 		};
+		2583138A20B755A000E96876 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2583138B20B755D700E96876 /* DrinkCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		258AD75520A6E51600EBB674 /* CellControllers */ = {
 			isa = PBXGroup;
 			children = (
-				258AD75820A6E54E00EBB674 /* DrinkCellController.swift */,
 				258AD75D20A886D300EBB674 /* ErrorCellController.swift */,
-				258AD75620A6E53C00EBB674 /* IngredientCellController.swift */,
 			);
 			path = CellControllers;
 			sourceTree = "<group>";
@@ -127,6 +137,7 @@
 				25A107FC20A44C6E007465E6 /* LaunchScreen.storyboard */,
 				CB59619120B02B1E00528E29 /* Services */,
 				25BC756C20A450EE009763EB /* Models */,
+				2583138A20B755A000E96876 /* Views */,
 				25BC756B20A450E2009763EB /* Controllers */,
 				25BC756D20A450F5009763EB /* Helpers */,
 			);
@@ -143,6 +154,8 @@
 				25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */,
 				255FC2B620AB40F9000DC738 /* TutorialViewController.swift */,
 				CB59619A20B0693300528E29 /* FavoritesViewController.swift */,
+				1F9684B920B2F70D00E2EAD1 /* FriendsViewController.swift */,
+				1F9684BD20B3155800E2EAD1 /* AddFriendsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -152,6 +165,7 @@
 			children = (
 				258AD75320A6276E00EBB674 /* DrinkModel.swift */,
 				CB59619420B030C100528E29 /* SnapshotParser.swift */,
+				1F9684B520B2548A00E2EAD1 /* FriendModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,6 +314,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/ZLSwipeableViewSwift/ZLSwipeableViewSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -312,6 +327,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLSwipeableViewSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -345,9 +361,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				258AD75920A6E54E00EBB674 /* DrinkCellController.swift in Sources */,
 				25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */,
 				258AD74E20A4594A00EBB674 /* BaseViewController.swift in Sources */,
+				2583138C20B755D700E96876 /* DrinkCardView.swift in Sources */,
 				258AD75420A6276E00EBB674 /* DrinkModel.swift in Sources */,
 				CB59619320B02B3900528E29 /* DrinkService.swift in Sources */,
 				258AD75C20A6EEF100EBB674 /* LayoutHelper.swift in Sources */,
@@ -355,9 +371,11 @@
 				CB59619520B030C100528E29 /* SnapshotParser.swift in Sources */,
 				CB59619B20B0693300528E29 /* FavoritesViewController.swift in Sources */,
 				255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */,
-				258AD75720A6E53C00EBB674 /* IngredientCellController.swift in Sources */,
 				258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */,
+				1F9684BE20B3155800E2EAD1 /* AddFriendsViewController.swift in Sources */,
 				CB59619920B0688200528E29 /* DrinkAPI.swift in Sources */,
+				1F9684BA20B2F70D00E2EAD1 /* FriendsViewController.swift in Sources */,
+				1F9684B620B2548A00E2EAD1 /* FriendModel.swift in Sources */,
 				25A107F120A44C6C007465E6 /* AppDelegate.swift in Sources */,
 				255FC2B720AB40F9000DC738 /* TutorialViewController.swift in Sources */,
 				258AD75220A45A0E00EBB674 /* DrinkDetailViewController.swift in Sources */,
@@ -500,13 +518,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZT8DW74932;
 				INFOPLIST_FILE = Bartinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bartindr.Bartinderr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bartinder.Bartinderrrr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bartinder/Bartinder-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -522,13 +540,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = ZT8DW74932;
 				INFOPLIST_FILE = Bartinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bartindr.Bartinderr;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bartinder.Bartinderrrr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bartinder/Bartinder-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

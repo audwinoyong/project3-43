@@ -8,7 +8,6 @@
 
 import Foundation
 import SnapKit
-import Alamofire
 import SwiftyJSON
 
 class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
@@ -32,8 +31,6 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
     var stackIngredients = UIStackView()
     
     var drink: DrinkModel!
-    var isError = false
-    var isLoading = false
     let imgPlaceholder = UIImage(named: "Cocktail")
     var blurImageProcessor: ALDBlurImageProcessor?
     
@@ -59,8 +56,6 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
         super.viewDidLoad()
         
         setupView()
-        
-        fetchData()
         
         updateImageBlur()
     }
@@ -147,6 +142,7 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
             make.top.equalTo(lblInstructions.snp.bottom).offset(4)
             make.right.equalToSuperview().inset(16)
         })
+        txtInstructions.text = drink.instructions
         txtInstructions.numberOfLines = 0
         
         
@@ -169,6 +165,53 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
         })
         stackIngredients.axis = .vertical
         stackIngredients.spacing = 16
+        for subview in stackIngredients.arrangedSubviews
+        {
+            stackIngredients.removeArrangedSubview(subview)
+        }
+        
+        for (ingredient, measurement) in drink.ingredientsAndMeasurements
+        {
+            let subview = UIView()
+            
+            // imgIngredient
+            let imgIngredient = UIImageView()
+            subview.addSubview(imgIngredient)
+            imgIngredient.snp.makeConstraints { make in
+                make.width.height.equalTo(40)
+                make.top.bottom.equalToSuperview()
+                make.left.equalToSuperview()
+            }
+            imgIngredient.clipsToBounds = true
+            imgIngredient.layer.cornerRadius = 20
+            imgIngredient.contentMode = .scaleAspectFit
+            imgIngredient.backgroundColor = .lightGray
+            let safeIng = ingredient.replacingOccurrences(of: " ", with: "%20")
+            imgIngredient.kf.setImage(with: URL(string: "https://www.thecocktaildb.com/images/ingredients/\(safeIng)-Small.png"))
+            
+            
+            // lblIngredient
+            let lblIngredient = UILabel()
+            subview.addSubview(lblIngredient)
+            lblIngredient.snp.makeConstraints { make in
+                make.left.equalTo(imgIngredient.snp.right).offset(16)
+                make.centerY.equalToSuperview()
+            }
+            lblIngredient.text = ingredient
+            
+            
+            // lblMeasurement
+            let lblMeasurement = UILabel()
+            subview.addSubview(lblMeasurement)
+            lblMeasurement.snp.makeConstraints { make in
+                make.right.equalToSuperview().inset(16)
+                make.centerY.equalToSuperview()
+            }
+            lblMeasurement.text = measurement
+            
+            
+            stackIngredients.addArrangedSubview(subview)
+        }
         
         
         // lytImgContainer
@@ -219,6 +262,7 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
             make.right.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
         })
+        lblDrinkAlcoholicType.text = drink.alcoholicType.lowercased()
         lblDrinkAlcoholicType.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize, weight: .light)
         lblDrinkAlcoholicType.textColor = .white
         
@@ -262,98 +306,6 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
     
     
     // MARK: Additional Helpers
-    
-    func fetchData()
-    {
-        if isLoading
-        {
-            return
-        }
-        
-        isLoading = true
-        
-        Alamofire.request("https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=\(drink.id)").responseJSON { response in
-            response.result.ifSuccess {
-                if let json = JSON(response.result.value!)["drinks"].array?.first
-                {
-                    self.updateDrink(DrinkModel(json: json))
-                    
-                    self.isError = false
-                }
-                
-                self.isLoading = false
-            }
-            
-            response.result.ifFailure {
-                print("failure")
-                self.isError = true
-                self.isLoading = false
-            }
-        }
-    }
-    
-    func updateDrink(_ drink: DrinkModel)
-    {
-        self.drink = drink
-        
-        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl), placeholder: imgPlaceholder, completionHandler: { (image, _, _, _) in
-            self.onImageDrinkChanged(to: image)
-        })
-        
-        lblDrinkTitle.text = drink.name
-        
-        lblDrinkAlcoholicType.text = drink.alcoholicType.lowercased()
-        
-        txtInstructions.text = drink.instructions
-        
-        for subview in stackIngredients.arrangedSubviews
-        {
-            stackIngredients.removeArrangedSubview(subview)
-        }
-        
-        for (ingredient, measurement) in drink.ingredientsAndMeasurements
-        {
-            let subview = UIView()
-            
-            // imgIngredient
-            let imgIngredient = UIImageView()
-            subview.addSubview(imgIngredient)
-            imgIngredient.snp.makeConstraints { make in
-                make.width.height.equalTo(40)
-                make.top.bottom.equalToSuperview()
-                make.left.equalToSuperview()
-            }
-            imgIngredient.clipsToBounds = true
-            imgIngredient.layer.cornerRadius = 20
-            imgIngredient.contentMode = .scaleAspectFit
-            imgIngredient.backgroundColor = .lightGray
-            let safeIng = ingredient.replacingOccurrences(of: " ", with: "%20")
-            imgIngredient.kf.setImage(with: URL(string: "https://www.thecocktaildb.com/images/ingredients/\(safeIng)-Small.png"))
-            
-            
-            // lblIngredient
-            let lblIngredient = UILabel()
-            subview.addSubview(lblIngredient)
-            lblIngredient.snp.makeConstraints { make in
-                make.left.equalTo(imgIngredient.snp.right).offset(16)
-                make.centerY.equalToSuperview()
-            }
-            lblIngredient.text = ingredient
-            
-            
-            // lblMeasurement
-            let lblMeasurement = UILabel()
-            subview.addSubview(lblMeasurement)
-            lblMeasurement.snp.makeConstraints { make in
-                make.right.equalToSuperview().inset(16)
-                make.centerY.equalToSuperview()
-            }
-            lblMeasurement.text = measurement
-            
-            
-            stackIngredients.addArrangedSubview(subview)
-        }
-    }
     
     func onImageDrinkChanged(to image: UIImage?)
     {

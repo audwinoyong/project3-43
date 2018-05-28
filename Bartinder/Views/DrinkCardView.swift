@@ -1,8 +1,8 @@
 //
-//  DrinkCellController.swift
+//  DrinkCardView.swift
 //  Bartinder
 //
-//  Created by Jason Kumar on 12.05.18.
+//  Created by Jason Kumar on 24.05.18.
 //  Copyright © 2018 Bartinder. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import SnapKit
 import Kingfisher
 
-class DrinkCellController: UIViewController // We don't want a white background here
+class DrinkCardView: UIView
 {
     // MARK: Properties
     
@@ -20,43 +20,51 @@ class DrinkCellController: UIViewController // We don't want a white background 
     var lblTitle = UILabel()
     
     private var drink: DrinkModel?
-    let imgPlaceholder = UIImage(named: "Cocktail")
+    let imgPlaceholder = UIImage(named: "Cocktail_BigIcon")
     
-    
-    // MARK: View Lifecycle
-    
-    override func viewDidLoad()
+    override init(frame: CGRect)
     {
-        super.viewDidLoad()
+        super.init(frame: frame)
         
         setupView()
     }
     
-    
-    // MARK: Layout
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        
+        setupView()
+    }
     
     func setupView()
     {
+        // Container
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.25
+        layer.shadowOffset = CGSize(width: 0, height: 1.5)
+        layer.shadowRadius = 4.0
+        layer.shouldRasterize = true
+        layer.rasterizationScale = UIScreen.main.scale
+        
+        
         // lytContainer
-        view.addSubview(lytContainer)
+        addSubview(lytContainer)
         lytContainer.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(24)
+            make.edges.equalToSuperview()
         }
         lytContainer.backgroundColor = .white
-        lytContainer.clipsToBounds = true
         lytContainer.layer.cornerRadius = 16
+        lytContainer.clipsToBounds = true
         
         
         // imgViewDrink
         lytContainer.addSubview(imgViewDrink)
         imgViewDrink.snp.makeConstraints({ make in
             make.left.top.right.equalToSuperview()
-            make.height.equalTo(lytContainer.snp.width)
+            make.height.equalTo(self.snp.width)
         })
         imgViewDrink.contentMode = .scaleAspectFill
         imgViewDrink.tintColor = .lightGray
-        imgViewDrink.image = imgPlaceholder
         
         
         // lytBottom
@@ -75,7 +83,7 @@ class DrinkCellController: UIViewController // We don't want a white background 
     }
     
     
-    // Additional Helpers
+    // MARK: Additional Helpers
     
     func getDrink() -> DrinkModel?
     {
@@ -86,15 +94,15 @@ class DrinkCellController: UIViewController // We don't want a white background 
     {
         self.drink = drink
         
-        if let drink = drink
-        {
-            imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl), placeholder: imgPlaceholder)
-            lblTitle.text = drink.name.uppercased()
-        }
-        else
+        guard let drink = drink else
         {
             imgViewDrink.image = imgPlaceholder
             lblTitle.text = ""
+            
+            return
         }
+        
+        imgViewDrink.kf.setImage(with: URL(string: drink.imgUrl), placeholder: imgPlaceholder)
+        lblTitle.text = drink.name.uppercased()
     }
 }
