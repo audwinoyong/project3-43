@@ -13,10 +13,13 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
     var drinks: [DrinkModel]
     var drinkService: DrinkService
     var tableView = UITableView()
+    var friendUserId: String?
     
-    init() {
+    init(friendId: String? = nil) {
         drinks = []
         drinkService = DrinkService()
+        
+        friendUserId = friendId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,7 +38,9 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
 
         // Do any additional setup after loading the view.
         // get drinks from firebase
-        if let uid = userId {
+        let uid = friendUserId == nil ? userId : friendUserId
+        
+        if let uid = uid {
             drinkService.getDrinksFor(userId: uid, callback: { result in
                 self.drinks = result
                 self.tableView.reloadData()

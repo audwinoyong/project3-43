@@ -23,6 +23,8 @@ class DrinkMatchingViewController: BaseViewController
     var isError = false
     var isLoading = false
     
+    var drinkService: DrinkService!
+    
     // MARK: Lifecycle
     
     init(ingredient: String)
@@ -44,9 +46,10 @@ class DrinkMatchingViewController: BaseViewController
     {
         super.viewDidLoad()
         
+        drinkService = DrinkService()
         setupView()
-        
         fetchData()
+        
         
         // Present tutorial above everything
         if !UserDefaultsHelper.getHasSeenTutorial()
@@ -85,15 +88,41 @@ class DrinkMatchingViewController: BaseViewController
         swipeableView.didTap = {view, _ in
             self.onDrinkTapped(view: view)
         }
+        
+        // signOutButton
+        let signOutButton = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(self.signOut))
+        self.navigationItem.rightBarButtonItem = signOutButton
+        
+        swipeableView.didSwipe = {view, direction, vector in
+            switch direction {
+            case .Right:
+                let drinkView = view as! DrinkCardView
+                self.addDrinkToFavorites(drinkView.getDrink()!)
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    func addDrinkToFavorites(_ drink: DrinkModel) {
+        if let uid = userId {
+            drinkService.saveDrinkFor(userId: uid, drink)
+        }
     }
     
     
     // MARK: User Interaction
+    @objc func signOut(_ sender: UIView) {
+        do {
+            try self.authUI?.signOut()
+        } catch {
+            // show error message
+        }
+    }
     
-    @objc func onDrinkTapped(view: UIView)
-    {
-        if let drinkView = view as? DrinkCardView, let drink = drinkView.getDrink()
-        {
+    @objc func onDrinkTapped(view: UIView) {
+        if let drinkView = view as? DrinkCardView, let drink = drinkView.getDrink() {
             navigationController?.pushViewController(DrinkDetailViewController(drink: drink), animated: true)
         }
     }
@@ -101,10 +130,8 @@ class DrinkMatchingViewController: BaseViewController
     
     // MARK: Additional Helpers
     
-    func fetchData()
-    {
-        if isLoading
-        {
+    func fetchData() {
+        if isLoading {
             return
         }
         

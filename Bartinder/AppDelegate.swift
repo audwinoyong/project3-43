@@ -31,19 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         let screen2 = DrinkMatchingViewController(ingredient: "Gin")
         screen2.title = "Drinks"
-//        screen2.tabBarItem = UITabBarItem(tabBarSystemItem: .downloads, tag: 1)
-//        let cocktailImage = UIImage(named: "Cocktail")
         screen2.tabBarItem = UITabBarItem(title: "Match", image: UIImage(named: "Cocktail"), tag: 1)
         screen2.tabBarItem.title = "Match"
-        
-//        var drink = DrinkModel()
-//        drink.id = "16134"
-//        drink.name = "Drink 1"
-//        drink.imgUrl = "https://www.thecocktaildb.com/images/media/drink/yvxrwv1472669728.jpg"
-//        let screen3 = DrinkDetailViewController(drink: drink)
-//        screen3.title = "Drink Detail"
-//        screen3.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 2)
-        
         
         let screen3 = FriendsViewController()
         screen3.title = "Friends"
@@ -57,9 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         }
         tabController.selectedIndex = 1
         self.window?.rootViewController = tabController
-        
-//        self.window?.rootViewController = UINavigationController(rootViewController: IngredientSelectionViewController())
-        
+                
         self.window?.makeKeyAndVisible()
         
         return true

@@ -19,7 +19,7 @@ struct DrinkService {
     
     func saveDrinkFor(userId: String, _ drink: DrinkModel) {
         // save record under user id
-        ref.child(userId).childByAutoId().setValue(drink.dictionary)
+        ref.child(userId).child(drink.id).setValue(drink.dictionary)
     }
     
 
@@ -30,6 +30,8 @@ struct DrinkService {
             guard snapshot.hasChildren() else {
                 return
             }
+            
+            drinks.removeAll()
             
             for child in snapshot.children {
                 drinks.append(DrinkModel(with: child as! DataSnapshot))

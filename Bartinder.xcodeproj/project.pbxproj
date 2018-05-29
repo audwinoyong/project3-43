@@ -29,6 +29,7 @@
 		CB59619520B030C100528E29 /* SnapshotParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619420B030C100528E29 /* SnapshotParser.swift */; };
 		CB59619920B0688200528E29 /* DrinkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619820B0688200528E29 /* DrinkAPI.swift */; };
 		CB59619B20B0693300528E29 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619A20B0693300528E29 /* FavoritesViewController.swift */; };
+		CB7F8A1920BC21F8008C4DE5 /* FriendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7F8A1820BC21F8008C4DE5 /* FriendService.swift */; };
 		F167837C68BDC031D059F402 /* Pods_Bartinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		CB59619420B030C100528E29 /* SnapshotParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotParser.swift; sourceTree = "<group>"; };
 		CB59619820B0688200528E29 /* DrinkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkAPI.swift; sourceTree = "<group>"; };
 		CB59619A20B0693300528E29 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		CB7F8A1820BC21F8008C4DE5 /* FriendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +197,7 @@
 			children = (
 				CB59619220B02B3900528E29 /* DrinkService.swift */,
 				CB59619820B0688200528E29 /* DrinkAPI.swift */,
+				CB7F8A1820BC21F8008C4DE5 /* FriendService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				CB59619B20B0693300528E29 /* FavoritesViewController.swift in Sources */,
 				255FC2B920AB4832000DC738 /* UserDefaultsHelper.swift in Sources */,
 				258AD75020A459CE00EBB674 /* DrinkMatchingViewController.swift in Sources */,
+				CB7F8A1920BC21F8008C4DE5 /* FriendService.swift in Sources */,
 				1F9684BE20B3155800E2EAD1 /* AddFriendsViewController.swift in Sources */,
 				CB59619920B0688200528E29 /* DrinkAPI.swift in Sources */,
 				1F9684BA20B2F70D00E2EAD1 /* FriendsViewController.swift in Sources */,

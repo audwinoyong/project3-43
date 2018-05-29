@@ -26,6 +26,7 @@ class BaseViewController: UIViewController, FUIAuthDelegate
     let providers: [FUIAuthProvider] = [
         FUIGoogleAuth()
     ]
+    var userService: FriendService!
     
     public var userId: String? {
         return auth?.currentUser?.uid
@@ -37,11 +38,15 @@ class BaseViewController: UIViewController, FUIAuthDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        userService = FriendService()
         view.backgroundColor = .white
         
         let authUI = FUIAuth.defaultAuthUI()
         authUI?.delegate = self
+        
+        if let user = auth?.currentUser {
+            userService.addUser(user: FriendModel(id: user.uid, name: user.displayName!))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -64,7 +69,7 @@ class BaseViewController: UIViewController, FUIAuthDelegate
                 
                 self.present(authViewController, animated: true, completion: nil)
             } else {
-                // user is signed in
+                // user is signed
             }
         })
     }
