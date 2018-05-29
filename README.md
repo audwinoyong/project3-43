@@ -28,3 +28,13 @@ May 13-18:
   
   
   May 28: Added proper tinder-like swipe. 
+
+May 30:
+- Drink Matching now comes from Random API
+- Swipe right adds to favorites list
+- Drink Detail now brings down data from the API
+- Refactored API to service class
+- New Friend Service for connectring to friends in db
+- Users now show up on Add Friend screen
+- Friends added now show on the Friends Screen
+- Tapping on a Friend shows that friends drinks
