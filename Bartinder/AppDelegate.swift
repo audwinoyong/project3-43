@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         screen1.title = "Favorites"
         screen1.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
         
-        let screen2 = DrinkMatchingViewController(ingredient: "Gin")
+        let screen2 = DrinkMatchingViewController()
         screen2.title = "Drinks"
         screen2.tabBarItem = UITabBarItem(title: "Match", image: UIImage(named: "Cocktail"), tag: 1)
         screen2.tabBarItem.title = "Match"

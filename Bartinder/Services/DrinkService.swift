@@ -19,7 +19,7 @@ struct DrinkService {
     
     func saveDrinkFor(userId: String, _ drink: DrinkModel) {
         // save record under user id
-        ref.child(userId).child(drink.id).setValue(drink.dictionary)
+        ref.child(userId).childByAutoId().setValue(drink.dictionary)
     }
     
 

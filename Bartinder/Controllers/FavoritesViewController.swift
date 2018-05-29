@@ -80,6 +80,6 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
     {
         let drink = drinks[indexPath.row]
         
-        navigationController?.pushViewController(DrinkDetailViewController(drink: drink), animated: true)
+        navigationController?.pushViewController(DrinkDetailViewController(drinkId: drink.id), animated: true)
     }
 }

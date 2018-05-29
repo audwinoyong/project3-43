@@ -164,9 +164,7 @@ class IngredientSelectionViewController: BaseViewController, UISearchResultsUpda
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let ingredient = filteredIngredients[indexPath.row]
-        
-        navigationController?.pushViewController(DrinkMatchingViewController(ingredient: ingredient), animated: true)
+        navigationController?.pushViewController(DrinkMatchingViewController(), animated: true)
     }
     
     

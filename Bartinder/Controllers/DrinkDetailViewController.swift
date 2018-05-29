@@ -31,14 +31,15 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
     var stackIngredients = UIStackView()
     
     var drink: DrinkModel!
+    var drinkId: String!
     let imgPlaceholder = UIImage(named: "Cocktail")
     var blurImageProcessor: ALDBlurImageProcessor?
     
     // MARK: Lifecycle
     
-    init(drink: DrinkModel)
+    init(drinkId: String)
     {
-        self.drink = drink
+        self.drinkId = drinkId
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -55,7 +56,7 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
     {
         super.viewDidLoad()
         
-        setupView()
+        fetchData()
         
         updateImageBlur()
     }
@@ -90,6 +91,13 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
         ]
 
         gradientView.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func fetchData() {
+        DrinkAPI.getDrinkById(id: self.drinkId, callback: { data in
+            self.drink = data
+            self.setupView()
+        })
     }
     
     

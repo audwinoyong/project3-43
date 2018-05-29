@@ -8,29 +8,28 @@
 
 import Foundation
 import SnapKit
-import Alamofire
 import SwiftyJSON
 import ZLSwipeableViewSwift
 
 class DrinkMatchingViewController: BaseViewController
 {
     // MARK: Properties
+    let numLoad = 10
+    let maxDistance = 5
+    var timesLoaded = 0
+    var loadBuffer: Int {
+        return drinks.count + Int(swipeableView.numberOfActiveView)
+    }
     
     var swipeableView = ZLSwipeableView()
-    
-    var ingredient: String!
-    var drinks = [DrinkModel]()
-    var isError = false
-    var isLoading = false
-    
     var drinkService: DrinkService!
+    
+    var drinks = [DrinkModel]()
     
     // MARK: Lifecycle
     
-    init(ingredient: String)
+    init()
     {
-        self.ingredient = ingredient
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -47,8 +46,8 @@ class DrinkMatchingViewController: BaseViewController
         super.viewDidLoad()
         
         drinkService = DrinkService()
+        fetchData(discardViews: true)
         setupView()
-        fetchData()
         
         
         // Present tutorial above everything
@@ -67,7 +66,6 @@ class DrinkMatchingViewController: BaseViewController
     override func viewDidLayoutSubviews()
     {
         super.viewDidLayoutSubviews()
-        
         swipeableView.nextView = { return self.nextCardView() }
     }
     
@@ -96,11 +94,18 @@ class DrinkMatchingViewController: BaseViewController
         swipeableView.didSwipe = {view, direction, vector in
             switch direction {
             case .Right:
-                let drinkView = view as! DrinkCardView
-                self.addDrinkToFavorites(drinkView.getDrink()!)
+                if let drinkView = view as? DrinkCardView, let drink = drinkView.getDrink() {
+                    self.addDrinkToFavorites(drink)
+                }
                 break
             default:
                 break
+            }
+            
+            print("Drinks left \(self.drinks.count). Calc Buffer \(self.drinks.count + 3). Buffer \(self.loadBuffer)")
+            if self.loadBuffer < self.maxDistance {
+                print("Buffer is less than \(self.maxDistance). Fetching data")
+                self.fetchData(discardViews: false)
             }
         }
     }
@@ -123,61 +128,36 @@ class DrinkMatchingViewController: BaseViewController
     
     @objc func onDrinkTapped(view: UIView) {
         if let drinkView = view as? DrinkCardView, let drink = drinkView.getDrink() {
-            navigationController?.pushViewController(DrinkDetailViewController(drink: drink), animated: true)
+            navigationController?.pushViewController(DrinkDetailViewController(drinkId: drink.id), animated: true)
         }
     }
     
     
     // MARK: Additional Helpers
     
-    func fetchData() {
-        if isLoading {
-            return
-        }
-        
-        isLoading = true
-        
-        let safeIng = ingredient.replacingOccurrences(of: " ", with: "_")
-        
-        Alamofire.request("https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=\(safeIng)").responseJSON { response in
-            response.result.ifSuccess
-            {
-                if let jsonArray = JSON(response.result.value!)["drinks"].array
-                {
-                    for drink in jsonArray
-                    {
-                        let drinkModel = DrinkModel(json: drink)
-                        
-                        self.drinks.append(drinkModel)
-                    }
-                    
-                    self.swipeableView.discardViews()
-                    self.swipeableView.loadViews()
-                }
-                
-                self.isLoading = false
-            }
-            
-            response.result.ifFailure
-            {
-                print("failure")
-                self.isError = true
-                self.isLoading = false
-            }
-        }
+    func fetchData(discardViews: Bool) {
+        DrinkAPI.getRandomDrinks(total: numLoad, callback: { data in
+            print("drink count: \(data.count)")
+            self.timesLoaded += 1
+            self.updateViews(data: data, discardViews: discardViews)
+        })
     }
     
-    func nextCardView() -> UIView?
-    {
+    func updateViews(data: [DrinkModel], discardViews: Bool) {
+        drinks.append(contentsOf: data)
+        if discardViews {
+            swipeableView.discardViews()
+        }
+        swipeableView.loadViews()
+    }
+    
+    func nextCardView() -> UIView? {
         let cardView = DrinkCardView(frame: self.swipeableView.bounds)
         
-        if !drinks.isEmpty
-        {
+        if !drinks.isEmpty {
             let model = drinks.remove(at: 0)
             cardView.setDrink(model)
-        }
-        else
-        {
+        } else {
             cardView.setDrink(nil)
         }
         
