@@ -18,4 +18,16 @@ struct LayoutHelper
         let statusBarSize = UIApplication.shared.statusBarFrame.size
         return Swift.min(statusBarSize.width, statusBarSize.height)
     }
+    
+    static func getTabBarHeight(for viewController: UIViewController?) -> CGFloat
+    {
+        if let height = viewController?.tabBarController?.tabBar.frame.height
+        {
+            return height
+        }
+        
+        let tabBarController = UITabBarController()
+        
+        return tabBarController.tabBar.frame.height
+    }
 }

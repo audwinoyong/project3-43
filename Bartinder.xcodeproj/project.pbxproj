@@ -24,6 +24,7 @@
 		25A107F320A44C6C007465E6 /* IngredientSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A107F220A44C6C007465E6 /* IngredientSelectionViewController.swift */; };
 		25A107FB20A44C6E007465E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FA20A44C6E007465E6 /* Assets.xcassets */; };
 		25A107FE20A44C6E007465E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25A107FC20A44C6E007465E6 /* LaunchScreen.storyboard */; };
+		25EDBAE820BEAA2F0097E147 /* UIImage+FromSolidColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDBAE720BEAA2F0097E147 /* UIImage+FromSolidColor.swift */; };
 		CB59619020B025B600528E29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB59618F20B025B600528E29 /* GoogleService-Info.plist */; };
 		CB59619320B02B3900528E29 /* DrinkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619220B02B3900528E29 /* DrinkService.swift */; };
 		CB59619520B030C100528E29 /* SnapshotParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB59619420B030C100528E29 /* SnapshotParser.swift */; };
@@ -56,6 +57,7 @@
 		25A107FA20A44C6E007465E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25A107FD20A44C6E007465E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		25A107FF20A44C6E007465E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25EDBAE720BEAA2F0097E147 /* UIImage+FromSolidColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+FromSolidColor.swift"; sourceTree = "<group>"; };
 		9E2264E51F607CCADF0888DD /* Pods-Bartinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bartinder.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bartinder/Pods-Bartinder.debug.xcconfig"; sourceTree = "<group>"; };
 		AB6F5AC616399B8E352CAC47 /* Pods_Bartinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bartinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB59618F20B025B600528E29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -177,10 +179,19 @@
 			children = (
 				255FC2C020ADB4FA000DC738 /* BlurImageProcessor */,
 				258AD75A20A6E9B900EBB674 /* Delegates */,
+				25EDBAE620BEAA130097E147 /* Extensions */,
 				258AD75B20A6EEF100EBB674 /* LayoutHelper.swift */,
 				255FC2B820AB4832000DC738 /* UserDefaultsHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		25EDBAE620BEAA130097E147 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				25EDBAE720BEAA2F0097E147 /* UIImage+FromSolidColor.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B7EB184E66571570AF83D1AC /* Pods */ = {
@@ -317,6 +328,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/ZLSwipeableViewSwift/ZLSwipeableViewSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -330,6 +342,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZLSwipeableViewSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -384,6 +397,7 @@
 				255FC2B720AB40F9000DC738 /* TutorialViewController.swift in Sources */,
 				258AD75220A45A0E00EBB674 /* DrinkDetailViewController.swift in Sources */,
 				255FC2C320ADB56A000DC738 /* ALDBlurImageProcessor.m in Sources */,
+				25EDBAE820BEAA2F0097E147 /* UIImage+FromSolidColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,10 +538,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Bartinder/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartinder.Bartinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bartinder/Bartinder-Bridging-Header.h";
@@ -546,10 +557,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Bartinder/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bartinder.Bartinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Bartinder/Bartinder-Bridging-Header.h";

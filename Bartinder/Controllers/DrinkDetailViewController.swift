@@ -90,7 +90,14 @@ class DrinkDetailViewController: BaseViewController, UIScrollViewDelegate
             UIColor(white: 0, alpha: 0).cgColor
         ]
 
-        gradientView.layer.insertSublayer(gradientLayer, at: 0)
+        if let previousLayer = gradientView.layer.sublayers?.first
+        {
+            gradientView.layer.replaceSublayer(previousLayer, with: gradientLayer)
+        }
+        else
+        {
+            gradientView.layer.insertSublayer(gradientLayer, at: 0)
+        }
     }
     
     func fetchData() {

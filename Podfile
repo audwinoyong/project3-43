@@ -11,6 +11,7 @@ target 'Bartinder' do
   pod 'SnapKit', '~>4.0'
   pod 'SwiftyJSON', '~>4.1'
   pod 'ZLSwipeableViewSwift', :git => 'https://github.com/zhxnlai/ZLSwipeableViewSwift.git', :commit => 'd3fed8f'
+  pod 'Toast-Swift', '~> 3.0.1'
   
   # Firebase components
   pod 'Firebase/Core'

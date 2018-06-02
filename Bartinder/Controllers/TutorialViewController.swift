@@ -13,10 +13,31 @@ class TutorialViewController: UIViewController
 {
     // MARK: Properties
     
-    var imgLeftArrow = UIImageView(image: UIImage(named: "Arrow_Left"))
-    var imgRightArrow = UIImageView(image: UIImage(named: "Arrow_Right"))
-    var lblTutorial = UILabel()
-    var btnDismiss = UIButton()
+    let imgLeftArrow = UIImageView(image: UIImage(named: "Arrow_Left"))
+    let imgRightArrow = UIImageView(image: UIImage(named: "Arrow_Right"))
+    let lblTutorial : UILabel =
+    {
+        let label = UILabel()
+        
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.text = "Swipe Right to add to your favourites, swipe left to pass!"
+        
+        return label
+    }()
+    lazy var btnDismiss : UIButton =
+    {
+        let button = UIButton()
+        
+        button.setBackgroundImage(UIImage(color: .white), for: .normal)
+        button.layer.cornerRadius = 8
+        button.clipsToBounds = true
+        button.setTitleColor(.black, for: .normal)
+        button.setTitle("OK", for: .normal)
+        button.addTarget(self, action: #selector(onBtnDismissTapped), for: .touchUpInside)
+        
+        return button
+    }()
     
     
     // MARK: Lifecycle
@@ -35,7 +56,7 @@ class TutorialViewController: UIViewController
     
     func setupView()
     {
-        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+        view.backgroundColor = UIColor(white: 0, alpha: 0.75)
         
         // lblTutorial
         view.addSubview(lblTutorial)
@@ -43,9 +64,6 @@ class TutorialViewController: UIViewController
             make.center.equalToSuperview()
             make.left.right.equalToSuperview().inset(64)
         })
-        lblTutorial.textColor = .white
-        lblTutorial.numberOfLines = 0
-        lblTutorial.text = "Swipe left and right to navigate between drinks."
         
         
         // imgLeftArrow
@@ -71,11 +89,10 @@ class TutorialViewController: UIViewController
         // btnDismiss
         view.addSubview(btnDismiss)
         btnDismiss.snp.makeConstraints { make in
-            make.right.bottom.equalToSuperview().inset(32)
+            make.size.equalTo(CGSize(width: 60, height: 30))
+            make.right.equalToSuperview().inset(32)
+            make.bottom.equalToSuperview().inset(16 + LayoutHelper.getTabBarHeight(for: nil))
         }
-        btnDismiss.setTitleColor(.white, for: .normal)
-        btnDismiss.setTitle("OK", for: .normal)
-        btnDismiss.addTarget(self, action: #selector(onBtnDismissTapped), for: .touchUpInside)
     }
     
     

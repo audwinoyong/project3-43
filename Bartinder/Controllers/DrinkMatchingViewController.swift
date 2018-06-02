@@ -10,6 +10,7 @@ import Foundation
 import SnapKit
 import SwiftyJSON
 import ZLSwipeableViewSwift
+import Toast_Swift
 
 class DrinkMatchingViewController: BaseViewController
 {
@@ -57,9 +58,9 @@ class DrinkMatchingViewController: BaseViewController
             
             providesPresentationContextTransitionStyle = true
             definesPresentationContext = true
-            tutorialVC.modalPresentationStyle = .overCurrentContext
+            tutorialVC.modalPresentationStyle = .overFullScreen
             
-            navigationController?.present(tutorialVC, animated: true, completion: nil)
+            navigationController?.present(tutorialVC, animated: false, completion: nil)
         }
     }
     
@@ -79,13 +80,14 @@ class DrinkMatchingViewController: BaseViewController
         swipeableView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(24)
             make.top.equalToSuperview().inset(LayoutHelper.statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0) + 32) // If SearchController messes navBar height up, simply use 44
-            make.bottom.equalToSuperview().inset((tabBarController?.tabBar.frame.height ?? 0) + 32)
+            make.bottom.equalToSuperview().inset(32 + LayoutHelper.getTabBarHeight(for: self))
         }
         swipeableView.allowedDirection = .Horizontal
         swipeableView.numberOfActiveView = 3
         swipeableView.didTap = {view, _ in
             self.onDrinkTapped(view: view)
         }
+        
         
         // signOutButton
         let signOutButton = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(self.signOut))
@@ -113,6 +115,7 @@ class DrinkMatchingViewController: BaseViewController
     func addDrinkToFavorites(_ drink: DrinkModel) {
         if let uid = userId {
             drinkService.saveDrinkFor(userId: uid, drink)
+            self.view.makeToast("Added to favorites", duration: 1.0, position: .bottom)
         }
     }
     
@@ -135,7 +138,8 @@ class DrinkMatchingViewController: BaseViewController
     
     // MARK: Additional Helpers
     
-    func fetchData(discardViews: Bool) {
+    func fetchData(discardViews: Bool)
+    {
         DrinkAPI.getRandomDrinks(total: numLoad, callback: { data in
             print("drink count: \(data.count)")
             self.timesLoaded += 1
@@ -143,7 +147,8 @@ class DrinkMatchingViewController: BaseViewController
         })
     }
     
-    func updateViews(data: [DrinkModel], discardViews: Bool) {
+    func updateViews(data: [DrinkModel], discardViews: Bool)
+    {
         drinks.append(contentsOf: data)
         if discardViews {
             swipeableView.discardViews()
@@ -151,13 +156,17 @@ class DrinkMatchingViewController: BaseViewController
         swipeableView.loadViews()
     }
     
-    func nextCardView() -> UIView? {
+    func nextCardView() -> UIView?
+    {
         let cardView = DrinkCardView(frame: self.swipeableView.bounds)
         
-        if !drinks.isEmpty {
+        if !drinks.isEmpty
+        {
             let model = drinks.remove(at: 0)
             cardView.setDrink(model)
-        } else {
+        }
+        else
+        {
             cardView.setDrink(nil)
         }
         
