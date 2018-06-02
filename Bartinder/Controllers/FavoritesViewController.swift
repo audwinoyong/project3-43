@@ -8,15 +8,24 @@
 
 import UIKit
 
-class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+    
+    // MARK: Properties
+    
+    var tableView = UITableView()
+    var searchController = UISearchController(searchResultsController: nil)
     
     var drinks: [DrinkModel]
+    var filteredDrinks: [DrinkModel]
     var drinkService: DrinkService
-    var tableView = UITableView()
     var friendUserId: String?
+    
+    var isError = false
+    var isLoading = false
     
     init(friendId: String? = nil) {
         drinks = []
+        filteredDrinks = []
         drinkService = DrinkService()
         
         friendUserId = friendId
@@ -26,6 +35,7 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
     
     required init?(coder aDecoder: NSCoder) {
         drinks = []
+        filteredDrinks = []
         drinkService = DrinkService()
         
         super.init(coder: aDecoder)
@@ -35,14 +45,16 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         
         setupView()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         // get drinks from firebase
         let uid = friendUserId == nil ? userId : friendUserId
         
         if let uid = uid {
             drinkService.getDrinksFor(userId: uid, callback: { result in
                 self.drinks = result
+                self.filteredDrinks = result
                 self.tableView.reloadData()
             })
         }
@@ -54,6 +66,17 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     func setupView() {
+        navigationItem.title = "Favorites"
+        
+        // searchController
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search drinks..."
+        searchController.searchBar.showsCancelButton = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false // If enabled, searchbar content disappears after search
+        definesPresentationContext = true // ensures that the search bar doesn't remain on screen if the user navigates to another view controller while the UISearchController is active
+        
         // tableView
         view.addSubview(tableView)
         tableView.snp.makeConstraints({ make in
@@ -61,25 +84,55 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
         })
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return drinks.count
+        return filteredDrinks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let drink = drinks[indexPath.row]
+        let drink = filteredDrinks[indexPath.row]
         
         let cell = UITableViewCell()
         cell.textLabel?.text = drink.name
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        let drink = drinks[indexPath.row]
+        let drink = filteredDrinks[indexPath.row]
         
         navigationController?.pushViewController(DrinkDetailViewController(drinkId: drink.id), animated: true)
+    }
+    
+    // MARK: UISearchControllerUpdating
+    
+    func updateSearchResults(for searchController: UISearchController)
+    {
+        guard !isLoading && !isError else
+        {
+            return
+        }
+        
+        if let searchText = searchController.searchBar.text
+        {
+            if searchText.replacingOccurrences(of: " ", with: "").count == 0
+            {
+                filteredDrinks = drinks
+            }
+            else
+            {
+                filteredDrinks = drinks.filter({ $0.name.lowercased().contains(searchText.lowercased()) })
+            }
+        }
+        else
+        {
+            filteredDrinks = drinks
+        }
+        
+        tableView.reloadData()
     }
 }

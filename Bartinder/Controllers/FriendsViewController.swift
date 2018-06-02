@@ -10,8 +10,11 @@ import UIKit
 
 class FriendsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var friends: [FriendModel]
+    // MARK: Properties
+    
     var tableView = UITableView()
+    
+    var friends: [FriendModel]
     var friendService: FriendService!
     
     init() {
@@ -69,11 +72,11 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
         
         // set bar button items
-        let editButton = UIBarButtonItem.init(barButtonSystemItem: .edit,
-                                              target: self,
-                                              action: #selector(editButtonTapped))
-        
-        self.navigationItem.leftBarButtonItem = editButton
+//        let editButton = UIBarButtonItem.init(barButtonSystemItem: .edit,
+//                                              target: self,
+//                                              action: #selector(editButtonTapped))
+//
+//        self.navigationItem.leftBarButtonItem = editButton
 
         let addButton = UIBarButtonItem.init(image: UIImage(named: "Contact Add"),
                                              style: .plain,
@@ -105,11 +108,11 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
         navigationController?.pushViewController(FavoritesViewController(friendId: friend.id), animated: true)
     }
     
-    @objc func editButtonTapped() {
-        let tableViewEditingMode = tableView.isEditing
-        
-        tableView.setEditing(!tableViewEditingMode, animated: true)
-    }
+//    @objc func editButtonTapped() {
+//        let tableViewEditingMode = tableView.isEditing
+//
+//        tableView.setEditing(!tableViewEditingMode, animated: true)
+//    }
     
     @objc func addButtonTapped() {
         navigationController?.pushViewController(AddFriendsViewController(), animated: true)
@@ -123,20 +126,20 @@ class FriendsViewController: BaseViewController, UITableViewDelegate, UITableVie
      }
      */
     
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .delete
-    }
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//        return .delete
+//    }
     
-    // Override to support editing the table view.
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            friends.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-//        } else if editingStyle == .insert {
-//            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
+//    // Override to support editing the table view.
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            friends.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+////        } else if editingStyle == .insert {
+////            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//        }
+//    }
  
     
     /*

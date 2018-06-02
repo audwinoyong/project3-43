@@ -10,10 +10,12 @@ import UIKit
 
 class AddFriendsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var users: [FriendModel]
-    var friends: [FriendModel] = []
+    // MARK: Properties
+    
     var tableView = UITableView()
     
+    var users: [FriendModel]
+    var friends: [FriendModel] = []
     var friendService: FriendService!
     
     init() {
