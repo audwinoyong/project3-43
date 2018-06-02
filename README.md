@@ -38,3 +38,11 @@ May 30:
 - Users now show up on Add Friend screen
 - Friends added now show on the Friends Screen
 - Tapping on a Friend shows that friends drinks
+
+
+June 1-2:
+- Fixed top layout bug on DrinkDetail where shadow was drawn twice
+- Forced portrait mode
+- Changed layout and text of tutorial
+- Show popup for favouriting beverages.
+
