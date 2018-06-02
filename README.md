@@ -44,5 +44,6 @@ June 1-2:
 - Fixed top layout bug on DrinkDetail where shadow was drawn twice
 - Forced portrait mode
 - Changed layout and text of tutorial
-- Show popup for favouriting beverages.
-
+- Show popup for favouriting beverages
+- Added search bar on Favorites screen
+- Removed edit button on Friends screen
