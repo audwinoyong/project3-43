@@ -18,15 +18,10 @@ class AddFriendsViewController: BaseViewController, UITableViewDelegate, UITable
     var friends: [FriendModel] = []
     var friendService: FriendService!
     
+    // MARK: Lifecycle
+    
     init() {
-        // pre-defined friends
         users = []
-//        friends = [FriendModel(id: "6", name: "Alice"),
-//                   FriendModel(id: "7", name: "Ben"),
-//                   FriendModel(id: "8", name: "Charles"),
-//                   FriendModel(id: "9", name: "Diana"),
-//                   FriendModel(id: "10", name: "Erika")]
-
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -36,6 +31,8 @@ class AddFriendsViewController: BaseViewController, UITableViewDelegate, UITable
         
         super.init(coder: aDecoder)
     }
+    
+    // MARK: View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +53,6 @@ class AddFriendsViewController: BaseViewController, UITableViewDelegate, UITable
         setupView()
     }
     
-    
     func setupView() {
         self.title = "Add Friends"
         
@@ -71,6 +67,8 @@ class AddFriendsViewController: BaseViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    // MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
@@ -123,20 +121,14 @@ class AddFriendsViewController: BaseViewController, UITableViewDelegate, UITable
             sender.setTitle("Add", for: .normal)
         }
         else {
-            // reset button title
-            sender.setTitle("Added", for: .normal)
-            
             // add friend to friend list
             if let uid = userId {
                 friendService.addFriendFor(userId: uid, friend: selectedFriend)
             }
+            
+            // reset button title
+            sender.setTitle("Added", for: .normal)
         }
-    }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }

@@ -40,7 +40,9 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
         
         super.init(coder: aDecoder)
     }
-
+    
+    // MARK: View Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,11 +62,6 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func setupView() {
         navigationItem.title = "Favorites"
         
@@ -87,6 +84,8 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
         
     }
     
+    // MARK: UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredDrinks.count
     }
@@ -100,6 +99,8 @@ class FavoritesViewController: BaseViewController, UITableViewDelegate, UITableV
         
         return cell
     }
+    
+    // MARK: UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
