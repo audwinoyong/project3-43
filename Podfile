@@ -18,5 +18,6 @@ target 'Bartinder' do
   pod 'Firebase/Database'
   pod 'FirebaseUI/Auth', '~> 5.0'
   pod 'FirebaseUI/Google', '~> 5.0'
+  pod 'FirebaseUI/Facebook', '~> 5.0'
 
 end

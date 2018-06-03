@@ -126,6 +126,7 @@ class DrinkMatchingViewController: BaseViewController
             try self.authUI?.signOut()
         } catch {
             // show error message
+            print("error signing out")
         }
     }
     

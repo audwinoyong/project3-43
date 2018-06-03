@@ -28,9 +28,21 @@
 				<string>com.googleusercontent.apps.629786818910-tprrpt5emmgpk9h5i5it6pac7s1a7mhp</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb199364924031017</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>199364924031017</string>
+	<key>FacebookDisplayName</key>
+	<string>Bartinder</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -24,7 +24,8 @@ class BaseViewController: UIViewController, FUIAuthDelegate
     fileprivate(set) var auth: Auth? = Auth.auth()
     fileprivate(set) var authUI: FUIAuth? = FUIAuth.defaultAuthUI()
     let providers: [FUIAuthProvider] = [
-        FUIGoogleAuth()
+        FUIGoogleAuth(),
+        FUIFacebookAuth()
     ]
     var userService: FriendService!
     

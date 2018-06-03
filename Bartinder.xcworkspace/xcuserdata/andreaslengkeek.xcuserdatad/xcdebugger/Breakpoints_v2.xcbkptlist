@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.9641041"
+            timestampString = "549711685.165563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "nextCardView()"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "updateViews(data:discardViews:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.964512"
+            timestampString = "549711685.165641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -74,13 +74,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.9648581"
+            timestampString = "549711685.165711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
-            landmarkName = "fetchData(discardViews:)"
-            landmarkType = "7">
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "DrinkMatchingViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.965126"
+            timestampString = "549711685.165759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "fetchData(discardViews:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.965379"
+            timestampString = "549711685.1658061"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.965623"
+            timestampString = "549711685.165851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "nextCardView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bartinder/Controllers/DrinkMatchingViewController.swift"
-            timestampString = "549295640.965917"
+            timestampString = "549711685.165936"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"

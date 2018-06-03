@@ -22,6 +22,8 @@
 #import "FUIPasswordSignInViewController.h"
 #import "FUIPasswordSignUpViewController.h"
 #import "FUIPasswordVerificationViewController.h"
+#import "FirebaseFacebookAuthUI.h"
+#import "FUIFacebookAuth.h"
 #import "FirebaseGoogleAuthUI.h"
 #import "FUIGoogleAuth.h"
 
