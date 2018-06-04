@@ -1,5 +1,10 @@
 # Project 43 - Bartinder 
 
+
+# How to run Bartinder
+- Double click the Bartinder.xcworkspace, **NOT** Bartinder.xcodeproj
+- Click run.
+
 Log:
 
 
